@@ -1,0 +1,173 @@
+.main-navigation {
+  display: block;
+
+  font-weight: 400;
+  clear: left;
+  padding-right: 5%;
+
+//Keeps the dropdown from changing the size of the header
+  li:hover {
+    cursor: pointer;
+  }
+
+  ul li ul {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    transition: all 0.5s ease;
+    margin-top: 1rem;
+    left: 0;
+    display: none;
+  }
+
+  ul li:hover > ul,
+  ul li ul:hover {
+    background-color: #2a63ff;
+    visibility: visible;
+    opacity: 1;
+    display: block;
+    padding: 0;
+  }
+
+  ul li ul li {
+    clear: both;
+    width: 100%;
+  }
+//the code lasts up to here. Needs to be put in the correct areas
+  ul {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding-top: 5px;
+    padding-left: 0;
+
+    ul {
+      display: none;
+      top: 1.5em;
+      z-index: 99999;
+
+      ul {
+        top: 0;
+      }
+
+      li {
+
+        padding-left: 1em;
+
+        &:hover > ul,
+        &.focus > ul {
+          left: 100%;
+        }
+      }
+
+      a {
+        width: 1px;
+      }
+    }
+
+    li:hover > ul,
+    li.focus > ul {
+      display:flex;
+    }
+  }
+
+  li {
+    position:relative;
+    margin-left: 70px;
+    display: block;
+    transition-duration: 0.5s;
+  }
+
+  a {
+    display: inline-block;
+    width: 100%;
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px;
+    text-transform: uppercase;
+    box-sizing: border-box;
+    transition: all 500ms ease;
+  }
+
+  a:hover{
+    background: $color__link-hover;
+    color: #ffffff;
+    box-shadow: inset 0 0 0 3px #ffffff;
+  }
+
+
+  .current_page_item > a,
+  .current-menu-item > a,
+  .current_page_ancestor > a,
+  .current-menu-ancestor > a {
+  }
+
+  .menu-item-has-children,
+  .page_item_has_children {
+    min-width: 218px;
+  }
+  .menu-item-has-children > a,
+  .page_item_has_children > a {
+    padding-right: 2em;
+  }
+}
+
+button.dropdown-toggle {
+  position: absolute;
+  right: 0;
+  border: none;
+  background: inherit;
+  color: white;
+  line-height: 1.5em;
+  padding: .4em 1em .4em .5em;
+}
+
+/* Toggle small menu and children on */
+
+.toggled-on ul,
+.sub-menu.toggled-on {
+  display: block;
+}
+
+@media screen and (min-width: $query__small) {
+  .menu-toggle {
+    display: none;
+  }
+
+  .main-navigation {
+
+    .menu-item-has-children > a,
+    .page_item_has_children > a {
+      padding-right: 2em;
+
+    }
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+
+      ul {
+        flex-direction: column;
+        background: hsla(0, 0%, 100%, .1);
+        margin-left: 0;
+
+        li {
+          padding-left: 0;
+
+          a {
+            width: 218px;
+            background: none;
+          }
+        }
+      }
+
+      li {
+
+        a {
+          padding: .4em 1em;
+        }
+      }
+    }
+
+  }
+}

@@ -31,6 +31,10 @@ define('WP_CONTENT_URL', $currenthost.$currentpath.'/wp-content');
 define('WP_PLUGIN_URL', $currenthost.$currentpath.'/wp-content/plugins');
 define('DOMAIN_CURRENT_SITE', $currenthost.$currentpath );
 @define('ADMIN_COOKIE_PATH', './');
+@define('FS_METHOD','direct');
+@ini_set( 'upload_max_size' , '20M' );
+@ini_set( 'post_max_size', '13M');
+@ini_set( 'memory_limit', '15M' );
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 define( 'DB_NAME', 'wordpress');
