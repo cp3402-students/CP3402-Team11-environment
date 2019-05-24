@@ -5,6 +5,12 @@
  * @copyright (c) 16.11.2018, Webcraftic
  * @version 1.0
  */
+
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 class WINP_Filter_List {
 
 	/**
@@ -21,12 +27,14 @@ class WINP_Filter_List {
 	 */
 	function restrictManagePosts()
 	{
-		$type = WINP_Plugin::app()->request->get('post_type', 'post');
+		$type = WINP_Plugin::app()->request->get( 'post_type', 'post' );
 
-		$terms = get_terms( array(
-			'taxonomy' => WINP_SNIPPETS_TAXONOMY,
-			'hide_empty' => true,
-		) );
+		$terms = get_terms(
+			array(
+				'taxonomy'   => WINP_SNIPPETS_TAXONOMY,
+				'hide_empty' => true,
+			)
+		);
 
 		if ( WINP_SNIPPETS_POST_TYPE == $type && ! empty( $terms ) ) { ?>
 			<select name="winp_filter_tag">
@@ -34,16 +42,16 @@ class WINP_Filter_List {
 				<?php
 				$current_filter = WINP_Plugin::app()->request->get( 'winp_filter_tag', '' );
 				foreach ( $terms as $term ) {
-				    if (is_object($term) && isset($term->slug)) {
-					    printf
-					    (
-						    '<option value="%s"%s>%s</option>',
-						    $term->slug,
-						    $term->slug == $current_filter ? ' selected="selected"' : '',
-						    $term->name
-					    );
-				    }
-				} ?>
+					if ( is_object( $term ) && isset( $term->slug ) ) {
+						printf(
+							'<option value="%s"%s>%s</option>',
+							$term->slug,
+							$term->slug == $current_filter ? ' selected="selected"' : '',
+							$term->name
+						);
+					}
+				}
+				?>
 			</select>
 			<?php
 		}
@@ -54,27 +62,27 @@ class WINP_Filter_List {
 	 *
 	 * @param $query
 	 */
-	function parseQuery( $query )
-	{
+	function parseQuery( $query ) {
 		global $pagenow;
 
-		$type = WINP_Plugin::app()->request->get('post_type', 'post');
+		$type = WINP_Plugin::app()->request->get( 'post_type', 'post' );
 
 		if (
 			WINP_SNIPPETS_POST_TYPE == $type
-		    && is_admin()
-		    && $pagenow == 'edit.php'
-		    && WINP_Plugin::app()->request->get( 'winp_filter_tag', '' )
+			&& is_admin()
+			&& 'edit.php' == $pagenow
+			&& WINP_Plugin::app()->request->get( 'winp_filter_tag', '' )
 		) {
 			$taxquery = array(
 				array(
 					'taxonomy' => WINP_SNIPPETS_TAXONOMY,
-					'field' => 'slug',
-					'terms' => array(WINP_Plugin::app()->request->get( 'winp_filter_tag', '' )),
-					'operator'=> 'IN'
-				)
+					'field'    => 'slug',
+					'terms'    => array( WINP_Plugin::app()->request->get( 'winp_filter_tag', '' ) ),
+					'operator' => 'IN',
+				),
 			);
 			$query->set( 'tax_query', $taxquery );
 		}
 	}
+
 }

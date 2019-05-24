@@ -43,12 +43,24 @@
   color: #ffffff;
 }
 .wp-list-table .wbcr-inp-snippet-type-label.wbcr-inp-type-text {
-  background: #ffeb3b;
-  color: #655d15;
+  background: #4CAF50;
+  color: #fffffd;
 }
 .wp-list-table .wbcr-inp-snippet-type-label.wbcr-inp-type-universal {
-  background: #cae8cc;
-  color: #3b6f3e;
+  background: #607D8B;
+  color: #ffffff;
+}
+.wp-list-table .wbcr-inp-snippet-type-label.wbcr-inp-type-css {
+  background: #1572b6;
+  color: #ffffff;
+}
+.wp-list-table .wbcr-inp-snippet-type-label.wbcr-inp-type-js {
+  background: #f7df1e;
+  color: #655b0e;
+}
+.wp-list-table .wbcr-inp-snippet-type-label.wbcr-inp-type-html {
+  background: #e44d26;
+  color: #fffffd;
 }
 .wp-list-table .wbcr-inp-status-marker {
   display: inline-block;
@@ -86,4 +98,3 @@
     font-size: 0;
   }
 }
-/*# sourceMappingURL=list-table.css.map */

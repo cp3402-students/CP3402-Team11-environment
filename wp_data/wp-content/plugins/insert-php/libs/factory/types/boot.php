@@ -14,16 +14,16 @@
 		exit;
 	}
 
-	if( defined('FACTORY_TYPES_405_LOADED') ) {
+	if( defined('FACTORY_TYPES_406_LOADED') ) {
 		return;
 	}
 
-	define('FACTORY_TYPES_405_LOADED', true);
+	define('FACTORY_TYPES_406_LOADED', true);
 
-	define('FACTORY_TYPES_405_DIR', dirname(__FILE__));
-	define('FACTORY_TYPES_405_URL', plugins_url(null, __FILE__));
+	define('FACTORY_TYPES_406_DIR', dirname(__FILE__));
+	define('FACTORY_TYPES_406_URL', plugins_url(null, __FILE__));
 
-	load_plugin_textdomain('wbcr_factory_types_405', false, dirname(plugin_basename(__FILE__)) . '/langs');
+	load_plugin_textdomain('wbcr_factory_types_406', false, dirname(plugin_basename(__FILE__)) . '/langs');
 
 	// sets version of admin interface
 	if( is_admin() ) {
@@ -33,7 +33,7 @@
 	}
 
 	#comp merge
-	require(FACTORY_TYPES_405_DIR . '/types.php');
-	require(FACTORY_TYPES_405_DIR . '/type.class.php');
-	require(FACTORY_TYPES_405_DIR . '/includes/type-menu.class.php');
+	require(FACTORY_TYPES_406_DIR . '/types.php');
+	require(FACTORY_TYPES_406_DIR . '/type.class.php');
+	require(FACTORY_TYPES_406_DIR . '/includes/type-menu.class.php');
 	#endcomp

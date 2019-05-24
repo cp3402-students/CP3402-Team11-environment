@@ -85,7 +85,6 @@
 			 */
 			public function __call($name, $arguments)
 			{
-
 				list($prefix, $type) = explode('_', $name, 2);
 				
 				if( $prefix !== 'shortcode' ) {
@@ -94,7 +93,7 @@
 
 				$blank = new $type($this->class_to_plugin[$type]);
 
-				return $blank->render($arguments[0], $arguments[1]);
+				return $blank->render($arguments[0], $arguments[1], $arguments[2]);
 			}
 
 			/**

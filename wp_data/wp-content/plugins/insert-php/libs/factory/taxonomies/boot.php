@@ -17,12 +17,12 @@
 	if( defined('FACTORY_T_000_LOADED') ) {
 		return;
 	}
-	define('FACTORY_TAXONOMIES_325_LOADED', true);
+	define('FACTORY_TAXONOMIES_326_LOADED', true);
 
-	define('FACTORY_TAXONOMIES_325_DIR', dirname(__FILE__));
-	define('FACTORY_TAXONOMIES_325_URL', plugins_url(null, __FILE__));
+	define('FACTORY_TAXONOMIES_326_DIR', dirname(__FILE__));
+	define('FACTORY_TAXONOMIES_326_URL', plugins_url(null, __FILE__));
 
-	load_plugin_textdomain('factory_taxonomies_325', false, dirname(plugin_basename(__FILE__)) . '/langs');
+	load_plugin_textdomain('factory_taxonomies_326', false, dirname(plugin_basename(__FILE__)) . '/langs');
 
 	// sets version of admin interface
 	if( is_admin() ) {
@@ -32,6 +32,6 @@
 	}
 
 	#comp merge	
-	require(FACTORY_TAXONOMIES_325_DIR . '/taxonomy.class.php');
-	require(FACTORY_TAXONOMIES_325_DIR . '/taxonomy.php');
+	require(FACTORY_TAXONOMIES_326_DIR . '/taxonomy.class.php');
+	require(FACTORY_TAXONOMIES_326_DIR . '/taxonomy.php');
 	#endcomp

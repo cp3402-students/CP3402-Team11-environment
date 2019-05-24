@@ -375,6 +375,8 @@ if( !window.winp ) {
                 value = this.getSelectValue(paramOptions);
             } else if( 'date' === paramOptions['type'] ) {
                 value = this.getDateValue(paramOptions);
+            } else if( 'date-between' === paramOptions['type'] ) {
+                value = this.getDateBetweenValue(paramOptions);
             } else if( 'integer' === paramOptions['type'] ) {
                 value = this.getIntegerValue(paramOptions);
             } else {
@@ -407,6 +409,8 @@ if( !window.winp ) {
                 operators = ['equals', 'notequal'];
             } else if( 'date' === paramOptions['type'] ) {
                 operators = ['equals', 'notequal', 'younger', 'older', 'between'];
+            } else if( 'date-between' === paramOptions['type'] ) {
+                operators = ['between'];
             } else if( 'integer' === paramOptions['type'] ) {
                 operators = ['equals', 'notequal', 'less', 'greater', 'between'];
             } else {
@@ -444,6 +448,8 @@ if( !window.winp ) {
                 this.createValueAsSelect(paramOptions, isInit);
             } else if( 'date' === paramOptions['type'] ) {
                 this.createValueAsDate(paramOptions, isInit);
+            } else if( 'date-between' === paramOptions['type'] ) {
+                this.createValueAsDateBetween(paramOptions, isInit);
             } else if( 'integer' === paramOptions['type'] ) {
                 this.createValueAsInteger(paramOptions, isInit);
             } else {
@@ -725,6 +731,86 @@ if( !window.winp ) {
         },
 
         // -------------------
+        // Date Between Control
+        // -------------------
+
+        /**
+         * Creates a control for the input linked with the date between.
+         */
+        createValueAsDateBetween: function(paramOptions, isInit) {
+            this._$condition.find('.winp-operator-select').hide();
+            var $control = this._$tmplDateControl.clone();
+            $control.addClass('winp-between');
+            $control.removeClass('winp-solo');
+            $control.addClass('winp-absolute');
+            $control.removeClass('winp-relative');
+
+            $control.find('.winp-switcher input').
+                attr('name', 'winp_switcher_' + this._index);
+            $control.find('.winp-switcher').hide();
+
+            $control.find('.winp-absolute-date input[type=\'text\']').datepicker({
+                format: 'dd.mm.yyyy',
+                todayHighlight: true,
+                autoclose: true
+            }).attr('readonly', false);
+
+            this.insertValueControl($control);
+            if (isInit && this.options.value) {
+                this.setDateBetweenValue(this.options.value);
+            }
+        },
+
+        /**
+          * Returns a value for the Date Between control.
+          * @returns {undefined}
+          */
+        getDateBetweenValue: function() {
+            var value = {};
+
+            var $holder = this._$condition.find(".winp-value > .winp-date-control");
+
+            $holder = $holder.find(".winp-between-date");
+            value.range = true;
+
+            value.start = {};
+            value.end = {};
+
+            $holder = $holder.find(".winp-absolute-date");
+
+            value.start = $holder.find(".winp-date-value-start").datepicker('getUTCDate').getTime();
+            value.end = $holder.find(".winp-date-value-end").datepicker('getUTCDate').getTime();
+            value.end = value.end + ( ( ( 23 * 60 * 60 ) + ( 59 * 60 ) + 59 ) * 1000 ) + 999;
+
+            return value;
+        },
+
+        /**
+          * Sets a select value.
+          */
+        setDateBetweenValue: function(value) {
+            if( !value ) {
+                value = {};
+            }
+
+            var $holder = this._$condition.find(".winp-value > .winp-date-control");
+            var $control = this._$condition.find(".winp-value > .winp-date-control");
+
+            $holder = $holder.find(".winp-absolute-date");
+
+            var start = new Date(value.start);
+            var end = new Date(value.end);
+
+            $holder.find(".winp-date-value-start").datepicker('setUTCDate', start);
+            $holder.find(".winp-date-value-end").datepicker('setUTCDate', end);
+
+            var $absolute = $control.find(".winp-switcher input[value=absolute]");
+
+            $absolute.attr('checked', 'checked');
+            $absolute.click();
+        },
+
+        // -------------------
         // Integer Control
         // -------------------
 
@@ -741,9 +827,9 @@ if( !window.winp ) {
 
                 var $control;
                 if( 'between' === currentOperator ) {
-                    $control = $("<span><input type='text' class='winp-integer bp-integer-start' /> and <input type='text' class='winp-integer bp-integer-end' /></span>");
+                    $control = $("<span><input type='text' class='winp-integer-start' /> and <input type='text' class='winp-integer-end' /></span>");
                 } else {
-                    $control = $("<input type='text' class='winp-integer bp-integer-solo' /></span>");
+                    $control = $("<input type='text' class='winp-integer-solo' /></span>");
                 }
 
                 self.insertValueControl($control);
@@ -837,12 +923,14 @@ if( !window.winp ) {
 
         setOperators: function(values) {
             var $operator = this._$condition.find(".winp-operator-select");
-            $operator.off('change');
+            $operator.show().off('change');
 
             $operator.find("option").hide();
             for( var index in values ) {
                 $operator.find("option[value='" + values[index] + "']").show();
             }
+            var value = $operator.find("option:not(:hidden):eq(0)").val();
+            $operator.val(value);
         },
 
         insertValueControl: function($control) {

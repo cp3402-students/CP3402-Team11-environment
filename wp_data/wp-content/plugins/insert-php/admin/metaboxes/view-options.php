@@ -1,6 +1,11 @@
 <?php
 
-class WINP_ViewOptionsMetaBox extends Wbcr_FactoryMetaboxes404_Metabox {
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+class WINP_ViewOptionsMetaBox extends WINP_MetaBox {
 
 	/**
 	 * A visible title of the metabox.
@@ -24,7 +29,7 @@ class WINP_ViewOptionsMetaBox extends Wbcr_FactoryMetaboxes404_Metabox {
 	 */
 	public $priority = 'core';
 
-	public $css_class = 'factory-bootstrap-410 factory-fontawesome-000';
+	public $css_class = 'factory-bootstrap-413 factory-fontawesome-000';
 
 	protected $errors = array();
 	protected $source_channel;
@@ -42,8 +47,8 @@ class WINP_ViewOptionsMetaBox extends Wbcr_FactoryMetaboxes404_Metabox {
 	 * Configures a metabox.
 	 *
 	 * @since 1.0.0
-	 * @param Wbcr_Factory410_ScriptList $scripts A set of scripts to include.
-	 * @param Wbcr_Factory410_StyleList $styles A set of style to include.
+	 * @param Wbcr_Factory413_ScriptList $scripts A set of scripts to include.
+	 * @param Wbcr_Factory413_StyleList $styles A set of style to include.
 	 * @return void
 	 */
 	public function configure($scripts, $styles)
@@ -80,7 +85,7 @@ class WINP_ViewOptionsMetaBox extends Wbcr_FactoryMetaboxes404_Metabox {
 						'type' => 'date',
 						'description' => __('The date when the user who views your website was registered. For unregistered users this date always equals to 1 Jan 1970.', 'insert-php')
 					),
-					array(
+					/*array(
 						'id' => 'user-mobile',
 						'title' => __('Mobile Device', 'insert-php'),
 						'type' => 'select',
@@ -89,7 +94,7 @@ class WINP_ViewOptionsMetaBox extends Wbcr_FactoryMetaboxes404_Metabox {
 							array('value' => 'no', 'title' => __('No', 'insert-php'))
 						),
 						'description' => __('Determines whether the user views your website from mobile device or not.', 'insert-php')
-					),
+					),*/
 					array(
 						'id' => 'user-cookie-name',
 						'title' => __('Cookie Name', 'insert-php'),
@@ -99,36 +104,6 @@ class WINP_ViewOptionsMetaBox extends Wbcr_FactoryMetaboxes404_Metabox {
 					)
 				)
 			),
-			/*array(
-				'id' => 'session',
-				'title' => __('Session', 'insert-php'),
-				'items' => array(
-					array(
-						'id' => 'session-pageviews',
-						'title' => __('Total Pageviews', 'insert-php'),
-						'type' => 'integer',
-						'description' => sprintf(__('The total count of pageviews made by the user within one\'s current session on your website. You can specify a duration of the sessions <a href="%s" target="_blank">here</a>.', 'insert-php'), admin_url('edit.php?post_type=' . WINP_SNIPPETS_POST_TYPE))
-					),
-					array(
-						'id' => 'session-locker-pageviews',
-						'title' => __('Locker Pageviews', 'insert-php'),
-						'type' => 'integer',
-						'description' => sprintf(__('The count of views of pages where lockers located, made by the user within one\'s current session on your website. You can specify a duration of the sessions <a href="%s" target="_blank">here</a>.', 'insert-php'), admin_url('edit.php?post_type=' . WINP_SNIPPETS_POST_TYPE))
-					),
-					array(
-						'id' => 'session-landing-page',
-						'title' => __('Landing Page', 'insert-php'),
-						'type' => 'text',
-						'description' => sprintf(__('A page of your website from which the user starts one\'s current session. You can specify a duration of the sessions <a href="%s" target="_blank">here</a>.', 'insert-php'), admin_url('edit.php?post_type=' . WINP_SNIPPETS_POST_TYPE))
-					),
-					array(
-						'id' => 'session-referrer',
-						'title' => __('Referrer', 'insert-php'),
-						'type' => 'text',
-						'description' => sprintf(__('A referrer URL which has brought the user to your website within the user\'s current session. You can specify a duration of the sessions <a href="%s" target="_blank">here</a>.', 'insert-php'), admin_url('edit.php?post_type=' . WINP_SNIPPETS_POST_TYPE))
-					)
-				)
-			),*/
 			array(
 				'id' => 'location',
 				'title' => __('Location', 'insert-php'),
@@ -177,18 +152,78 @@ class WINP_ViewOptionsMetaBox extends Wbcr_FactoryMetaboxes404_Metabox {
 					)
 				)
 			),
-			/*array(
-				'id' => 'post',
-				'title' => __('Post', 'insert-php'),
+			array(
+				'id'    => 'technology',
+				'title' => __( 'Technology', 'insert-php' ) . ' (PRO)',
 				'items' => array(
 					array(
-						'id' => 'post-published',
-						'title' => __('Publication Date', 'insert-php'),
-						'type' => 'date',
-						'description' => __('The publication date of a post where a user who views your website is located currently.', 'insert-php')
-					)
-				)
-			),*/
+						'id'          => 'technology-addblocker',
+						'title'       => __( 'Addblocker', 'insert-php' ),
+						'type'        => 'disabled',
+						'description' => __( 'Determines whether the user use Addblocker on website.', 'insert-php' ),
+					),
+					array(
+						'id'          => 'technology-browser',
+						'title'       => __( 'Browser', 'insert-php' ),
+						'type'        => 'disabled',
+						'description' => __( 'Determines whether the user use selected browser.', 'insert-php' ),
+					),
+					array(
+						'id'          => 'technology-use-cookie',
+						'title'       => __( 'Use cookie', 'insert-php' ),
+						'type'        => 'disabled',
+						'description' => __( 'Determines whether the user use cookie on website.', 'insert-php' ),
+					),
+					array(
+						'id'          => 'technology-use-javascript',
+						'title'       => __( 'Use javascript', 'insert-php' ),
+						'type'        => 'disabled',
+						'description' => __( 'Determines whether the user use javascript on website.', 'insert-php' ),
+					),
+					array(
+						'id'          => 'technology-operating-system',
+						'title'       => __( 'Operating system', 'insert-php' ),
+						'type'        => 'disabled',
+						'description' => __( 'Determines whether the user use selected OS.', 'insert-php' ),
+					),
+					array(
+						'id'          => 'technology-device-type',
+						'title'       => __( 'Device type', 'insert-php' ),
+						'type'        => 'disabled',
+						'description' => __( 'Determines whether the user use selected device type.', 'insert-php' ),
+					),
+				),
+			),
+			array(
+				'id'    => 'auditory',
+				'title' => __( 'Auditory', 'insert-php' ) . ' (PRO)',
+				'items' => array(
+					array(
+						'id'          => 'auditory-country',
+						'title'       => __( 'User country', 'insert-php' ),
+						'type'        => 'disabled',
+						'description' => __( 'Geolocation', 'insert-php' ),
+					),
+					array(
+						'id'          => 'auditory-viewing',
+						'title'       => __( 'Viewing depth', 'insert-php' ),
+						'type'        => 'disabled',
+						'description' => __( 'The number of pages viewed by the user per session', 'insert-php' ),
+					),
+					array(
+						'id'          => 'auditory-attendance',
+						'title'       => __( 'Attendance by time of day', 'insert-php' ),
+						'type'        => 'disabled',
+						'description' => __( 'The time interval during which the user entered', 'insert-php' ),
+					),
+					array(
+						'id'          => 'auditory-visits',
+						'title'       => __( 'Total number of visits', 'insert-php' ),
+						'type'        => 'disabled',
+						'description' => __( 'The total number of sessions opened by the user', 'insert-php' ),
+					),
+				),
+			),
 		);
 
 		$groupedFilterParams = apply_filters('wbcr/inp/visibility/filter_params', $groupedFilterParams);
@@ -310,7 +345,7 @@ class WINP_ViewOptionsMetaBox extends Wbcr_FactoryMetaboxes404_Metabox {
                             <?php foreach($groupedFilterParams as $filterParam) { ?>
                                 <optgroup label="<?php echo $filterParam['title'] ?>">
                                     <?php foreach($filterParam['items'] as $param) { ?>
-                                        <option value="<?php echo $param['id'] ?>">
+                                        <option value="<?php echo $param['id'] ?>"<?php echo 'disabled' == $param['type'] ? ' disabled' : '' ?>>
                                             <?php echo $param['title'] ?>
                                         </option>
                                     <?php } ?>

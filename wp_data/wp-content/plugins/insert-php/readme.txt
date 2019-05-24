@@ -1,9 +1,10 @@
-=== Woody ad snippets - insert any code, text, or ads via using conditions ===
+=== Woody ad snippets - insert any code, text, or ads by conditions ===
 Contributors: WillBontrager, webcraftic
 Donate link: http://www.willmaster.com/plugindonate.php
 Tags: code snippets, run PHP, insert PHP, Header, Footer, ads, use PHP, PHP plugin, ads, adsense, ad rotation, shortcoder, ad inserter, Header, Footer, ad manager, amp ads, amazon, ad blocking detection, header code, banner, banners, advert, adverts, sticky fixed widgets
 Requires at least: 4.2
-Tested up to: 5.0
+Tested up to: 5.2
+Requires PHP: 5.4
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -205,6 +206,29 @@ We will definitely add multisite support in the future. You can speed up this pr
 6. Adding a snippet shortcode to a text widget
 
 == Changelog ==
+= 2.2.2 =
+- Fixed: Disabled wpautop for snippets
+- Fixed: Added compatibility with plugin Robin image optimizer
+
+= 2.2.1 =
+- Warning: Support for the old shortcodes ([insert_php]) has been discontinued for new users. Users who have upgraded from version 1.3.0 still have support [insert_php].
+- Fixed: Removed warnings about support for old shortcodes for new users.
+- Fixed: Сkeditor editor over the code editor, the issue is related to The Rex theme
+- Fixed: Warning Invalid argument supplied for foreach(). (It’s the warning in plugin insert-php (method getMetaOption) because get_post_meta could return non-array value if $single is true.)
+- Fixed: Some users lost the code editor
+- Fixed: Infinite redirect after updating or installing a plugin
+- Fixed: Infinite redirect on multisites
+- Added: New snippet type: Html. Perfect for you if you do not use php code.
+- Added: New snippet type: JavaScript
+- Added: New snippet type: Css
+- Added: JS and CSS snippets can be asset as external files
+- Added: Compatible with Wordpress 5.2
+- Added: Multisite support
+- Added: Premium plugin support added
+- Added: Added setting: "Complete Uninstall". When the plugin is deleted from the Plugins menu, also delete all snippets and plugin settings.- Added: Added setting: "Complete Uninstall". When the plugin is deleted from the Plugins menu, also delete all snippets and plugin settings.
+- Added: Added setting: "Support old shortcodes [insert_php]". If you used our plugin from version 1.3.0, then you could use the old shortcodes [insert_php][/insert_php]; from version 2.2.0 we disabled this type of shortcodes by default, as their use is not safe. If you still want to execute your php code via [insert_php][/insert_php] shortcodes, you can enable this option.
+- Added: Added setting: "Keep the HTML entities, don't convert to its character". If you want to use an HTML entity in your code (for example > or "), but the editor keeps on changing them to its equivalent character (> and " for the previous example), then you might want to enable this option.
+
 = 2.1.91 =
 - Fixed: some users were redirected to about page an infinite number of times
 - Fixed: safe mode did not work, since it could be started only after the snippet

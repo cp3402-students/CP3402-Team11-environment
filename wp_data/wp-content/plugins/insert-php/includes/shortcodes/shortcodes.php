@@ -1,10 +1,15 @@
 <?php
-
 /**
  * A base shortcode for all lockers
  *
  * @since 1.0.0
  */
+
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 class WINP_SnippetShortcode extends Wbcr_FactoryShortcodes325_Shortcode {
 	
 	public $shortcode_name = 'wbcr_php_snippet';
@@ -106,13 +111,15 @@ class WINP_SnippetShortcode extends Wbcr_FactoryShortcodes325_Shortcode {
 	/**
 	 * Get snippet content
 	 *
-	 * @param $snippet_meta
-	 * @param $id
+	 * @param WP_Post $snippet
+	 * @param array $snippet_meta
+	 * @param int $id
 	 *
 	 * @return null|string
 	 */
-	public function getSnippetContent( $snippet_meta, $id ) {
-		return isset( $snippet_meta[ $this->plugin->getPrefix() . 'snippet_code' ] ) ? WINP_Plugin::app()->getExecuteObject()->prepareCode( $snippet_meta[ $this->plugin->getPrefix() . 'snippet_code' ][0], $id ) : null;
+	public function getSnippetContent( $snippet, $snippet_meta, $id ) {
+		$snippet_code = WINP_Helper::get_snippet_code($snippet);
+		return WINP_Plugin::app()->getExecuteObject()->prepareCode( $snippet_code, $id );
 	}
 	
 	/**
@@ -120,8 +127,9 @@ class WINP_SnippetShortcode extends Wbcr_FactoryShortcodes325_Shortcode {
 	 *
 	 * @param array $attr
 	 * @param string $content
+	 * @param string $tag
 	 */
-	public function html( $attr, $content ) {
+	public function html( $attr, $content, $tag ) {
 	
 	}
 	

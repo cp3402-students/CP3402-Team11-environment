@@ -14,7 +14,7 @@
 		exit;
 	}
 
-	if( !class_exists('Wbcr_FactoryMetaboxes404_Metabox') ) {
+	if( !class_exists('Wbcr_FactoryMetaboxes405_Metabox') ) {
 
 		/**
 		 * The base class for all metaboxes.
@@ -22,7 +22,7 @@
 		 * @link http://codex.wordpress.org/Function_Reference/add_meta_box
 		 * @since 1.0.0
 		 */
-		abstract class Wbcr_FactoryMetaboxes404_Metabox {
+		abstract class Wbcr_FactoryMetaboxes405_Metabox {
 
 			/**
 			 * Id of the metabox.
@@ -71,7 +71,7 @@
 			 * Scripts that should be include on the page where the metabox will be shown.
 			 *
 			 * @since 1.0.0
-			 * @var Wbcr_Factory410_ScriptList
+			 * @var Wbcr_Factory413_ScriptList
 			 */
 			public $scripts;
 
@@ -79,7 +79,7 @@
 			 * Styles that should be include on the page where the metabox will be shown.
 			 *
 			 * @since 1.0.0
-			 * @var Wbcr_Factory410_StyleList
+			 * @var Wbcr_Factory413_StyleList
 			 */
 			public $styles;
 
@@ -93,9 +93,9 @@
 
 			/**
 			 * Creates a new instance of a metabox.
-			 * @param Wbcr_Factory410_Plugin $plugin
+			 * @param Wbcr_Factory413_Plugin $plugin
 			 */
-			public function __construct(Wbcr_Factory410_Plugin $plugin)
+			public function __construct(Wbcr_Factory413_Plugin $plugin)
 			{
 				$this->plugin = $plugin;
 				$this->id = empty($this->id)
@@ -120,8 +120,8 @@
 			 * Configures a metabox.
 			 *
 			 * @since 1.0.0
-			 * @param Factory410_ScriptList $scripts A set of scripts to include.
-			 * @param Factory410_StyleList $styles A set of style to include.
+			 * @param Factory413_ScriptList $scripts A set of scripts to include.
+			 * @param Factory413_StyleList $styles A set of style to include.
 			 * @return void
 			 */
 			public function configure($scripts, $styles)

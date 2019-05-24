@@ -8,6 +8,32 @@
   color: #bbb;
   padding: 4px 5px 0;
 }
+.wbcr-inp-snippet-type-css .CodeMirror-sizer:before {
+  content: '<style type="text/css">';
+  color: #bbb;
+  padding: 4px 5px 0;
+}
+.wbcr-inp-snippet-type-css .CodeMirror:after {
+  content: '</style>';
+  position: absolute;
+  display: block;
+  left: 55px;
+  bottom: 3px;
+  color: #bbb;
+}
+.wbcr-inp-snippet-type-js .CodeMirror-sizer:before {
+  content: '<script type="text/javascript">';
+  color: #bbb;
+  padding: 4px 5px 0;
+}
+.wbcr-inp-snippet-type-js .CodeMirror:after {
+  content: '</script>';
+  position: absolute;
+  display: block;
+  left: 55px;
+  bottom: 3px;
+  color: #bbb;
+}
 .CodeMirror {
   height: auto !important;
   border: 0 !important;
@@ -141,5 +167,41 @@
 }
 .winp-import-radio-container label {
   font-weight: normal;
+}
+.wrap .winp-page-title-action {
+  margin-left: 4px;
+  padding: 4px 8px;
+  position: relative;
+  top: -3px;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  background: #f7f7f7;
+  text-shadow: none;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: normal;
+  color: #0073aa;
+  cursor: pointer;
+}
+.wrap .winp-field-premium-icon::after {
+  display: inline-block;
+  position: relative;
+  content: 'PRO';
+  background: #ff5722;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 10px;
+  line-height: 1;
+  font-style: normal;
+  padding: 4px 6px;
+  margin-left: 4px;
+  vertical-align: top;
+  top: -40px;
+  left: 230px;
+  z-index: 11;
+}
+.wrap .winp-field-w250 {
+  width: 250px;
 }
 /*# sourceMappingURL=general.css.map */

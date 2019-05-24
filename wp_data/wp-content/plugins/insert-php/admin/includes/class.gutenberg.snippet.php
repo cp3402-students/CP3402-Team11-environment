@@ -7,6 +7,12 @@
  * @copyright (c) 11.12.2018, Webcraftic
  * @version 1.0
  */
+
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 class WINP_Gutenberg_Snippet {
 	
 	/**
@@ -82,7 +88,7 @@ class WINP_Gutenberg_Snippet {
 				'tags'  => $tags
 			);
 		}
-		
+
 		return $prepared_object;
 	}
 	
@@ -118,7 +124,7 @@ class WINP_Gutenberg_Snippet {
 		$snippet_attrs = $current_snippet['tags'];
 		$type          = $current_snippet['type'];
 		
-		$shortcode_attributes = ' id="' . $snipped_id . '" ';
+		$shortcode_attributes = apply_filters( 'wbcr/inp/gutenberg/shortcode_attributes', ' id="' . $snipped_id . '" ', $snipped_id );
 		
 		$attr_values = isset( $attributes['attrValues'] ) ? $attributes['attrValues'] : null;
 		if ( ! empty( $attr_values ) ) {
@@ -143,7 +149,7 @@ class WINP_Gutenberg_Snippet {
 			$shortcode_attributes = trim( $shortcode_attributes );
 		}
 		
-		$shortcode_name = sprintf( "wbcr%s_snippet", ( $type === WINP_SNIPPET_TYPE_UNIVERSAL ? '' : '_' . $type ) );
+		$shortcode_name = apply_filters( 'wbcr/inp/gutenberg/shortcode_name', sprintf( "wbcr%s_snippet", ( $type === WINP_SNIPPET_TYPE_UNIVERSAL ? '' : '_' . $type ) ), $snipped_id );
 		
 		$shortcode = "[{$shortcode_name} {$shortcode_attributes}]";
 		
@@ -153,15 +159,16 @@ class WINP_Gutenberg_Snippet {
 		
 		return do_shortcode( $shortcode );
 	}
-	
+
 	function renderShippet( $attributes ) {
 		if ( empty( $attributes ) ) {
 			return;
 		}
 		ob_start();
 		?>
-        <div style="background:red; color:white; padding:1em;"><?php echo $attributes['content']; ?></div>
+        <div style="background:red; color:white; padding:1em;"><?php esc_html_e( $attributes['content'] ); ?></div>
 		<?php
 		return ob_get_clean();
 	}
+
 }

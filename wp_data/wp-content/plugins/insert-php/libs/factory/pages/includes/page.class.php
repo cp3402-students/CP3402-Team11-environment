@@ -14,9 +14,9 @@
 		exit;
 	}
 
-	if( !class_exists('Wbcr_FactoryPages411_Page') ) {
+	if( !class_exists('Wbcr_FactoryPages413_Page') ) {
 
-		class Wbcr_FactoryPages411_Page {
+		class Wbcr_FactoryPages413_Page {
 
 			/**
 			 * Page id used to call.
@@ -26,7 +26,7 @@
 
 			/**
 			 * Current Factory Plugin.
-			 * @var Wbcr_Factory410_Plugin
+			 * @var Wbcr_Factory413_Plugin
 			 */
 			public $plugin;
 
@@ -38,10 +38,10 @@
 			//private $default_actions = array();
 
 			/**
-			 * @param Wbcr_Factory410_Plugin $plugin
+			 * @param Wbcr_Factory413_Plugin $plugin
 			 * @throws Exception
 			 */
-			public function __construct(Wbcr_Factory410_Plugin $plugin)
+			public function __construct(Wbcr_Factory413_Plugin $plugin)
 			{
 				$this->plugin = $plugin;
 
@@ -100,7 +100,7 @@
 
 				if( !method_exists($this, $actionFunction) ) {
 					// todo: продумать и доработать выполнение произвольных и глобальных дейтсвия для всех страниц
-					/*$custom_actions = apply_filters('wbcr/factory_pages_411/custom_actions', array(), $raw_action_name);
+					/*$custom_actions = apply_filters('wbcr/factory_pages_413/custom_actions', array(), $raw_action_name);
 
 					if(isset($custom_actions[$raw_action_name])) {
 						$custom_actions[$raw_action_name]();

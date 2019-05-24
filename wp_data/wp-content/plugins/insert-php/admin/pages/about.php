@@ -2,11 +2,11 @@
 /**
  * The file contains a short help info.
  *
- * @author Alex Kovalev <alex.kovalevv@gmail.com>
+ * @author        Alex Kovalev <alex.kovalevv@gmail.com>
+ * @since         1.0.0
+ * @package       core
  * @copyright (c) 2018, OnePress Ltd
  *
- * @package core
- * @since 1.0.0
  */
 
 // Exit if accessed directly
@@ -17,25 +17,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Common Settings
  */
-class WINP_AboutPage extends Wbcr_FactoryPages411_AdminPage {
-	
+class WINP_AboutPage extends WINP_Page {
+
 	/**
-	 * @param Wbcr_Factory410_Plugin $plugin
+	 * @param Wbcr_Factory413_Plugin $plugin
 	 */
-	public function __construct( Wbcr_Factory410_Plugin $plugin ) {
+	public function __construct( Wbcr_Factory413_Plugin $plugin ) {
 		$this->menu_post_type = WINP_SNIPPETS_POST_TYPE;
-		
+
 		$this->id         = "about";
 		$this->menu_title = __( 'About', 'insert-php' );
-		
+
 		parent::__construct( $plugin );
-		
+
 		$this->plugin = $plugin;
 	}
-	
+
 	public function indexAction() {
+		global $wp_version;
+
 		?>
-        <div class="wrap about-wrap" id="wbcr-inp-about">
+        <div class="wrap about-wrap full-width-layout" id="wbcr-inp-about">
         <!-- News Title !-->
         <h1>Welcome to Woody ad snippets <?php echo $this->plugin->getPluginVersion() ?></h1>
         <!-- News Subtext !-->
@@ -44,7 +46,7 @@ class WINP_AboutPage extends Wbcr_FactoryPages411_AdminPage {
         </div>
         <!-- Settings Tabs -->
         <h2 class="nav-tab-wrapper" id="wbcr-inp-tab-nav">
-            <a href="<?= $this->getActionUrl( 'index' ); ?>" class="nav-tab"><?php _e( 'What&#8217;s New', 'insert-php' ); ?></a>
+            <a href="<?php echo $this->getActionUrl( 'index' ); ?>" class="nav-tab"><?php _e( 'What&#8217;s New', 'insert-php' ); ?></a>
             <a href="http://woody-ad-snippets.webcraftic.com/getting-started-with-woody-ad-snippets/" target="_blank" class="nav-tab"><?php _e( 'Documentation', 'insert-php' ); ?></a>
         </h2>
         <!-- Latest News !-->
@@ -110,7 +112,7 @@ class WINP_AboutPage extends Wbcr_FactoryPages411_AdminPage {
                     <h2>New Snippet types</h2>
                 </div>
             </div>
-            <div class="under-the-hood feature-section three-col">
+            <div class="<?php echo( version_compare( $wp_version, '5.2', '<' ) ? 'under-the-hood feature-section three-col' : 'is-fullwidth has-3-columns' ) ?>">
                 <div class="col" style="text-align: center">
                     <picture>
                         <img src="http://woody-ad-snippets.webcraftic.com/images/about/php-snippet.jpg" alt="" style="width:80%;box-shadow: 0 0 10px rgba(0,0,0,0.3);">

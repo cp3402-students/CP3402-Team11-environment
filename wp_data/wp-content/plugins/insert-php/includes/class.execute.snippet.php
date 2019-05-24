@@ -1,24 +1,38 @@
 <?php
-
 /**
  * Execute snippet
  * @author Webcraftic <wordpress.webraftic@gmail.com>
  * @copyright (c) 16.11.2018, Webcraftic
  * @version 1.0
  */
+
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 class WINP_Execute_Snippet {
 	
 	/**
 	 * WINP_Execute_Snippet constructor.
 	 */
 	public function __construct() {
+		if ( ! defined( 'WINP_UPLOAD_DIR' ) ) {
+			$dir = wp_upload_dir();
+			define( 'WINP_UPLOAD_DIR', $dir['basedir'] . '/winp-css-js' );
+		}
+
+		if ( ! defined( 'WINP_UPLOAD_URL' ) ) {
+			$dir = wp_upload_dir();
+			define( 'WINP_UPLOAD_URL', $dir['baseurl'] . '/winp-css-js' );
+		}
 	}
 	
 	/**
 	 * Register hooks
 	 */
 	public function registerHooks() {
-		add_action( 'plugins_loaded', array( $this, 'executeEverywhereSnippets' ), 1 );
+		add_action( 'wp', array( $this, 'executeEverywhereSnippets' ), 1 );
 		
 		if ( ! is_admin() ) { #issue PCS-45 fix bug with WPBPage Builder Frontend Editor
 			add_action( 'wp_head', array( $this, 'executeHeaderSnippets' ) );
@@ -202,7 +216,7 @@ class WINP_Execute_Snippet {
 			if ( ! comments_open( $post->ID ) && ! get_comments_number( $post->ID ) ) {
 				remove_filter( 'wp_list_comments_args', array( $this, 'executeListCommentsSnippets' ) );
 			}
-		} else if ( isset( $winp_after_post_content[ $post->ID ] ) ) {
+		} elseif ( ! is_null( $post ) && isset( $winp_after_post_content[ $post->ID ] ) ) {
 			// После последнего поста в списке
 			$content .= $winp_after_post_content[ $post->ID ];
 			unset( $winp_after_post_content[ $post->ID ] );
@@ -304,25 +318,36 @@ class WINP_Execute_Snippet {
 			$is_condition = $snippet_type != WINP_SNIPPET_TYPE_PHP ? $this->checkCondition( $id ) : true;
 			
 			if ( $is_active && $avail_place && $is_condition ) {
-				if ( isset( $_POST['wbcr_inp_snippet_scope'] ) && isset( $_POST['post_ID'] ) && (int) $_POST['post_ID'] === $id && WINP_Plugin::app()->currentUserCan() ) {
+				$snippet_scope = WINP_Plugin::app()->request->post( 'wbcr_inp_snippet_scope' );
+				$post_id = WINP_Plugin::app()->request->post( 'post_ID', 0 );
+				if (
+					! empty( $snippet_scope )
+					&& $post_id === $id
+					&& WINP_Plugin::app()->currentUserCan()
+				) {
 					return $content;
 				}
 				
 				if ( WINP_Helper::is_safe_mode() ) {
 					return $content;
 				}
-				
+
+				$snippet_code = WINP_Helper::get_snippet_code($snippet);
+
 				if ( $snippet_type === WINP_SNIPPET_TYPE_TEXT ) {
-					$snippet_content = '<div class="winp-text-snippet-contanier">' . $snippet->post_content . '</div>';
+					$snippet_content = '<div class="winp-text-snippet-contanier">' . $snippet_code . '</div>';
+				} else if ( $snippet_type === WINP_SNIPPET_TYPE_CSS || $snippet_type === WINP_SNIPPET_TYPE_JS ) {
+					$snippet_content = self::getJsCssSnippetData( $id );
+				} else if ( $snippet_type === WINP_SNIPPET_TYPE_HTML ) {
+					$snippet_content = $snippet_code;
 				} else {
-					$code = WINP_Helper::getMetaOption( $id, 'snippet_code' );
-					$code = $this->prepareCode( $code, $id );
+					$code = $this->prepareCode( $snippet_code, $id );
 					ob_start();
 					$this->executeSnippet( $code, $id, false );
 					$snippet_content = ob_get_contents();
 					ob_end_clean();
 				}
-				
+
 				if ( 'auto' == $scope ) {
 					switch ( $auto ) {
 						case WINP_SNIPPET_AUTO_BEFORE_PARAGRAPH:   // Перед параграфом
@@ -351,6 +376,48 @@ class WINP_Execute_Snippet {
 		}
 		
 		return $content;
+	}
+
+	/**
+	 * Get js or css snippet data
+	 *
+	 * @param $snippet_id
+	 *
+	 * @return mixed|string
+	 */
+	public static function getJsCssSnippetData( $snippet_id )
+	{
+		$snippet_type = WINP_Helper::get_snippet_type( $snippet_id );
+
+		$linking  = WINP_Helper::getMetaOption( $snippet_id, 'snippet_linking' );
+		$filetype = WINP_Helper::getMetaOption( $snippet_id, 'filetype', $snippet_type );
+
+		$file_name = $snippet_id . '.' . $filetype;
+		$slug      = WINP_Helper::getMetaOption( $snippet_id, 'css_js_slug' );
+		if ( ! empty( $slug ) ) {
+			$file_name = $slug . '.' . $filetype;
+		}
+
+		if ( file_exists( WINP_UPLOAD_DIR . '/' . $file_name ) ) {
+			if ( 'inline' == $linking ) {
+				return file_get_contents( WINP_UPLOAD_DIR . '/' . $file_name );
+			}
+
+			if ( 'external' == $linking ) {
+				$file_name .= '?ver=' . WINP_Helper::getMetaOption( $snippet_id, 'css_js_version', time() );
+
+				if ( 'js' == $snippet_type ) {
+					return PHP_EOL . "<script type='text/javascript' src='" . WINP_UPLOAD_URL . '/' . $file_name . "'></script>" . PHP_EOL;
+				}
+
+				if ( 'css' == $snippet_type ) {
+					$short_filename = preg_replace( '@\.css\?ver=.*$@', '', $file_name );
+					return PHP_EOL . "<link rel='stylesheet' id='" . $short_filename . "-css'  href='" . WINP_UPLOAD_URL . '/' . $file_name . "' type='text/css' media='all' />" . PHP_EOL;
+				}
+			}
+		}
+
+		return "";
 	}
 	
 	/**
@@ -451,8 +518,12 @@ class WINP_Execute_Snippet {
 					// Проходим по OR условиям
 					foreach ( $scope_conditions as $condition ) {
 						$method_name = str_replace( '-', '_', $this->getPropertyValue( $condition, 'param' ) );
+						$operator    = $this->getPropertyValue( $condition, 'operator' );
+						$value       = $this->getPropertyValue( $condition, 'value' );
 						// Получаем результат OR условий
-						$or_conditions = is_null( $or_conditions ) ? $this->$method_name( $this->getPropertyValue( $condition, 'operator' ), $this->getPropertyValue( $condition, 'value' ) ) : $or_conditions || $this->$method_name( $this->getPropertyValue( $condition, 'operator' ), $this->getPropertyValue( $condition, 'value' ) );
+						$or_conditions = is_null( $or_conditions )
+							? $this->call_method( $method_name, $operator, $value )
+							: $or_conditions || $this->call_method( $method_name, $operator, $value );
 					}
 					// Получаем результат AND условий
 					$and_conditions = is_null( $and_conditions ) ? $or_conditions : $and_conditions && $or_conditions;
@@ -463,6 +534,23 @@ class WINP_Execute_Snippet {
 		}
 		
 		return $result;
+	}
+
+	/**
+	 * Call specified method
+	 *
+	 * @param $method_name
+	 * @param $operator
+	 * @param $value
+	 *
+	 * @return bool
+	 */
+	private function call_method( $method_name, $operator, $value ) {
+		if ( method_exists( $this, $method_name ) ) {
+			return $this->$method_name( $operator, $value );
+		} else {
+			return apply_filters( 'wbcr/inp/execute/check_condition', false, $method_name, $operator, $value );
+		}
 	}
 	
 	/**
@@ -477,7 +565,13 @@ class WINP_Execute_Snippet {
 			return false;
 		}
 		
-		$snippet_code = WINP_Helper::getMetaOption( $snippet_id, 'snippet_code' );
+		$snippet = get_post( $snippet_id );
+		
+		if ( ! $snippet ) {
+			return false;
+		}
+
+		$snippet_code = WINP_Helper::get_snippet_code($snippet);
 		$snippet_code = $this->prepareCode( $snippet_code, $snippet_id );
 		
 		$result = $this->executeSnippet( $snippet_code, $snippet_id );
@@ -505,7 +599,12 @@ class WINP_Execute_Snippet {
 	 */
 	public function prepareCode( $code, $snippet_id ) {
 		$snippet_type = WINP_Helper::get_snippet_type( $snippet_id );
-		if ( $snippet_type != WINP_SNIPPET_TYPE_UNIVERSAL ) {
+		if (
+			$snippet_type != WINP_SNIPPET_TYPE_UNIVERSAL
+			&& $snippet_type != WINP_SNIPPET_TYPE_CSS
+			&& $snippet_type != WINP_SNIPPET_TYPE_JS
+			&& $snippet_type != WINP_SNIPPET_TYPE_HTML
+		) {
 			/* Remove <?php and <? from beginning of snippet */
 			$code = preg_replace( '|^[\s]*<\?(php)?|', '', $code );
 			
@@ -528,7 +627,7 @@ class WINP_Execute_Snippet {
 			$out = trim( $url[0], '/' );
 		}
 		
-		return $out ? urldecode( $out ) : $out;
+		return $out ? urldecode( $out ) : '/';
 	}
 	
 	/**
@@ -543,7 +642,7 @@ class WINP_Execute_Snippet {
 			$out = trim( $url[0], '/' );
 		}
 		
-		return $out ? urldecode( $out ) : $out;
+		return $out ? urldecode( $out ) : '/';
 	}
 	
 	/**
@@ -556,16 +655,16 @@ class WINP_Execute_Snippet {
 	 *
 	 * @return bool
 	 */
-	private function checkByOperator( $operation, $first, $second, $third = false ) {
+	public function checkByOperator( $operation, $first, $second, $third = false ) {
 		switch ( $operation ) {
 			case 'equals':
 				return $first === $second;
 			case 'notequal':
 				return $first !== $second;
-			case 'greater':
+			case 'less':
 			case 'older':
 				return $first > $second;
-			case 'less':
+			case 'greater':
 			case 'younger':
 				return $first < $second;
 			case 'contains':
@@ -579,7 +678,7 @@ class WINP_Execute_Snippet {
 				return $first === $second;
 		}
 	}
-	
+
 	/**
 	 * A role of the user who views your website. The role "guest" is applied for unregistered users.
 	 *
@@ -638,7 +737,7 @@ class WINP_Execute_Snippet {
 	 *
 	 * @return integer
 	 */
-	private function getDateTimestamp( $value ) {
+	public function getDateTimestamp( $value ) {
 		if ( is_object( $value ) ) {
 			return ( current_time( 'timestamp' ) - $this->getTimestamp( $value->units, $value->unitsCount ) ) * 1000;
 		} else {
@@ -806,8 +905,8 @@ class WINP_Execute_Snippet {
 	 */
 	private function location_page( $operator, $value ) {
 		$url = $this->getCurrentUrl();
-		
-		return $url ? $this->checkByOperator( $operator, $url, $value ) : false;
+
+		return $url ? $this->checkByOperator( $operator, trim( $url, '/' ), trim( $value, '/' ) ) : false;
 	}
 	
 	/**
@@ -820,8 +919,8 @@ class WINP_Execute_Snippet {
 	 */
 	private function location_referrer( $operator, $value ) {
 		$url = $this->getRefererUrl();
-		
-		return $url ? $this->checkByOperator( $operator, $url, $value ) : false;
+
+		return $url ? $this->checkByOperator( $operator, trim( $url, '/' ), trim( $value, '/' ) ) : false;
 	}
 	
 	/**

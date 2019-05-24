@@ -17,12 +17,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Common Settings
  */
-class WINP_NewItemPage extends Wbcr_FactoryPages411_AdminPage {
+class WINP_NewItemPage extends WINP_Page {
  
 	/**
-	 * @param Wbcr_Factory410_Plugin $plugin
+	 * @param Wbcr_Factory413_Plugin $plugin
 	 */
-	public function __construct( Wbcr_Factory410_Plugin $plugin ) {
+	public function __construct( Wbcr_Factory413_Plugin $plugin ) {
 		$this->menu_post_type = WINP_SNIPPETS_POST_TYPE;
 		
 		$this->menu_position = 1;
@@ -65,8 +65,23 @@ class WINP_NewItemPage extends Wbcr_FactoryPages411_AdminPage {
 				'help'        => 'http://woody-ad-snippets.webcraftic.com/getting-started-with-woody-ad-snippets/#Creating_a_Universal_Snippet',
 				'description' => '<p>' . __( 'Used for inserting php, html, js & css code. Can be used for inserting ads, analytics, embeds & other complex scenarios.', 'insert-php' ) . '</p>'
 			),
+			WINP_SNIPPET_TYPE_CSS => array(
+				'title'       => __( 'Css snippet', 'insert-php' ),
+				'help'        => '#',
+				'description' => '<p>' . __( 'Used for inserting css code. Can be used for inserting css styles.', 'insert-php' ) . '</p>'
+			),
+			WINP_SNIPPET_TYPE_JS => array(
+				'title'       => __( 'JavaScript snippet', 'insert-php' ),
+				'help'        => '#',
+				'description' => '<p>' . __( 'Used for inserting js code. Can be used for inserting ads, analytics, embeds & other complex scenarios.', 'insert-php' ) . '</p>'
+			),
+			WINP_SNIPPET_TYPE_HTML => array(
+				'title'       => __( 'HTML snippet', 'insert-php' ),
+				'help'        => '#',
+				'description' => '<p>' . __( 'Used for inserting html code. Can be used for inserting html code.', 'insert-php' ) . '</p>'
+			),
 		); ?>
-        <div class="wrap factory-fontawesome-000">
+        <div class="wrap <?php echo WINP_Helper::get_factory_class(); ?>">
             <div class="wbcr-inp-items">
                 <h2><?php _e( 'Creating New Snippet', 'insert-php' ) ?></h2>
                 <p style="margin-top: 0;"><?php _e( 'Choose which snippet you would like to create.', 'insert-php' ) ?></p>

@@ -1,6 +1,11 @@
 <?php
 
-class WINP_SnippetsViewTable extends Wbcr_FactoryViewtables405_Viewtable {
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+class WINP_SnippetsViewTable extends Wbcr_FactoryViewtables406_Viewtable {
 	
 	public function configure() {
 		/**
@@ -100,9 +105,9 @@ class WINP_SnippetsViewTable extends Wbcr_FactoryViewtables405_Viewtable {
 			}
 			echo __( 'Automatic insertion', 'insert-php' ) . ': ' . $text;
 		} else {
-			$snippet_type = WINP_Helper::getMetaOption( $post->ID, 'snippet_type', WINP_SNIPPET_TYPE_PHP );
+			$snippet_type = WINP_Helper::get_snippet_type( $post->ID );
 			$snippet_type = ( $snippet_type == WINP_SNIPPET_TYPE_UNIVERSAL ? '' : $snippet_type . '_' );
-			echo '[wbcr_' . $snippet_type . 'snippet id="' . $post->ID . '"]';
+			echo apply_filters( 'wbcr/inp/viewtable/where_use', '[wbcr_' . $snippet_type . 'snippet id="' . $post->ID . '"]', $post->ID );
 		}
 	}
 	
@@ -141,43 +146,63 @@ class WINP_SnippetsViewTable extends Wbcr_FactoryViewtables405_Viewtable {
 	 * Activate/Deactivate snippet
 	 */
 	protected function runActions() {
-		if ( isset( $_GET['post_type'] ) && $_GET['post_type'] == WINP_SNIPPETS_POST_TYPE ) {
-			
-			if ( isset( $_GET['action'] ) && isset( $_GET['post'] ) && $_GET['action'] == 'wbcr_inp_activate_snippet' ) {
-				$post_id = (int) $_GET['post'];
-				
-				if ( ( isset( $_GET['_wpnonce'] ) && ! wp_verify_nonce( $_GET['_wpnonce'], 'wbcr_inp_snippert_' . $post_id . '_action_nonce' ) ) || ! current_user_can( 'manage_options' ) ) {
+		if ( WINP_Plugin::app()->request->get( 'post_type', '', true ) == WINP_SNIPPETS_POST_TYPE ) {
+			$post   = WINP_Plugin::app()->request->get( 'post', 0 );
+			$action = WINP_Plugin::app()->request->get( 'action', '', 'sanitize_key' );
+
+			if ( ! empty( $action ) && ! empty( $post ) && 'wbcr_inp_activate_snippet' == $action ) {
+				$post_id = (int) $post;
+				$wpnonce = WINP_Plugin::app()->request->get( '_wpnonce', '' );
+
+				if (
+					( ! empty( $wpnonce ) && ! wp_verify_nonce( $wpnonce, 'wbcr_inp_snippert_' . $post_id . '_action_nonce' ) )
+					|| ! current_user_can( 'manage_options' )
+				) {
 					wp_die( 'Permission error. You can not edit this page.' );
 				}
-				
+
 				$is_activate   = (int) WINP_Helper::getMetaOption( $post_id, 'snippet_activate', 0 );
 				$snippet_scope = WINP_Helper::getMetaOption( $post_id, 'snippet_scope' );
 				$snippet_type  = WINP_Helper::get_snippet_type( $post_id );
-				
+
 				/**
 				 * Prevent activation of the snippet if it contains an error. This will not allow the user to break his site.
 				 * @since 2.0.5
 				 */
-				if ( ( $snippet_scope == 'evrywhere' || $snippet_scope == 'auto' ) && $snippet_type != WINP_SNIPPET_TYPE_TEXT && ! $is_activate ) {
+				if (
+					( 'evrywhere' == $snippet_scope || 'auto' == $snippet_scope )
+					&& $snippet_type != WINP_SNIPPET_TYPE_TEXT
+					&& $snippet_type != WINP_SNIPPET_TYPE_CSS
+					&& $snippet_type != WINP_SNIPPET_TYPE_JS
+					&& ! $is_activate
+				) {
 					if ( WINP_Plugin::app()->getExecuteObject()->getSnippetError( $post_id ) ) {
-						wp_safe_redirect( add_query_arg( array(
-							'action'                       => 'edit',
-							'post'                         => $post_id,
-							'wbcr_inp_save_snippet_result' => 'code-error'
-						), admin_url( 'post.php' ) ) );
+						wp_safe_redirect(
+							add_query_arg(
+								array(
+									'action' => 'edit',
+									'post'   => $post_id,
+									'wbcr_inp_save_snippet_result' => 'code-error',
+								),
+								admin_url( 'post.php' )
+							)
+						);
 						exit;
 					}
 				}
-				
+
 				$status = ! $is_activate;
-				
+
 				update_post_meta( $post_id, $this->plugin->getPrefix() . 'snippet_activate', $status );
-				
-				$redirect_url = add_query_arg( array(
-					'post_type'                => WINP_SNIPPETS_POST_TYPE,
-					'wbcr_inp_snippet_updated' => 1
-				), admin_url( 'edit.php' ) );
-				
+
+				$redirect_url = add_query_arg(
+					array(
+						'post_type'                => WINP_SNIPPETS_POST_TYPE,
+						'wbcr_inp_snippet_updated' => 1,
+					),
+					admin_url( 'edit.php' )
+				);
+
 				wp_safe_redirect( $redirect_url );
 				exit;
 			}
