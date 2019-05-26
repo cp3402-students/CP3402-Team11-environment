@@ -4,7 +4,7 @@
  * Plugin URI: http://woody-ad-snippets.webcraftic.com/
  * Description: Executes PHP code, uses conditional logic to insert ads, text, media content and external service’s code. Ensures no content duplication.
  * Author: Will Bontrager Software, LLC <will@willmaster.com>, Webcraftic <wordpress.webraftic@gmail.com>
- * Version: 2.2.2
+ * Version: 2.2.3
  * Text Domain: insert-php
  * Domain Path: /languages/
  * Author URI: http://webcraftic.com

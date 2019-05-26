@@ -99,8 +99,11 @@ class MEC_feature_mec extends MEC_base
         $this->PT = $this->main->get_main_post_type();
 
         // Disable Block Editor
+        $gutenberg_status = (!isset($this->settings['gutenberg']) or (isset($this->settings['gutenberg']) and $this->settings['gutenberg'])) ? true : false;
+        if($gutenberg_status):
         $this->factory->filter('gutenberg_can_edit_post_type', array($this, 'gutenberg'), 10, 2);
         $this->factory->filter('use_block_editor_for_post_type', array($this, 'gutenberg'), 10, 2);
+        endif; 
 
         // Export Settings
         $this->factory->action('wp_ajax_download_settings', array($this, 'download_settings'));

@@ -51,15 +51,15 @@ if(!is_array($weather) or (is_array($weather) and !count($weather))) return;
             <div class="mec-weather-extras">
 
                 <?php if(isset($weather['windSpeed'])): ?>
-                <div class="mec-weather-wind"><span><?php _e('Wind', 'modern-events-calendar-lite'); ?>:</span> <?php echo round($weather['windSpeed']); ?><var><?php _e(' KPH','modern-events-calendar-lite"'); ?></var></div>
+                <div class="mec-weather-wind"><span><?php _e('Wind', 'modern-events-calendar-lite'); ?>:</span> <?php echo round($weather['windSpeed']); ?><var><?php _e(' KPH','modern-events-calendar-lite'); ?></var></div>
                 <?php endif; ?>
 
                 <?php if(isset($weather['humidity'])): ?>
-                    <div class="mec-weather-humidity"><span><?php _e('Humidity', 'modern-events-calendar-lite'); ?>:</span> <?php echo round($weather['humidity']); ?><var><?php _e(' %','modern-events-calendar-lite"'); ?></var></div>
+                    <div class="mec-weather-humidity"><span><?php _e('Humidity', 'modern-events-calendar-lite'); ?>:</span> <?php echo round($weather['humidity']); ?><var><?php _e(' %','modern-events-calendar-lite'); ?></var></div>
                 <?php endif; ?>
 
                 <?php if(isset($weather['visibility'])): ?>
-                    <div class="mec-weather-visibility"><span><?php _e('Visibility', 'modern-events-calendar-lite'); ?>:</span> <?php echo round($weather['visibility']); ?><var><?php _e(' KM','modern-events-calendar-lite"'); ?></var></div>
+                    <div class="mec-weather-visibility"><span><?php _e('Visibility', 'modern-events-calendar-lite'); ?>:</span> <?php echo round($weather['visibility']); ?><var><?php _e(' KM','modern-events-calendar-lite'); ?></var></div>
                 <?php endif; ?>
         
             </div>

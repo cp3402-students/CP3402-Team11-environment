@@ -79,7 +79,8 @@
 	.mec-tooltip:hover:after { background: #313130; border-radius: 5px; bottom: 24px; color: #fff; content: attr(title); left: -75px; padding: 10px; position: absolute; z-index: 98; width: 240px;}
 	.mec-tooltip:hover:before { border: solid; border-color: #313130 transparent; border-width: 6px 6px 0; bottom: 18px; content: ""; left: 30%; position: absolute; z-index: 99;}
 	.mec-tooltip .dashicons-before:before { font-size: 24px; color: #008aff; line-height: 37px;}
-	
+	.mec-tooltip a:focus { box-shadow: none; }
+
 	/* unvalid */
 	.mec-form-row .bootstrap_unvalid{ display: block; border: 2px solid red ; position: relative; display: inline-block; border-bottom: 1px dotted black;}
 	.mec-tooltiptext{ visibility: hidden; width: 120px; background-color: red; color: #fff; text-align: center; border-radius: 6px; padding: 5px 0; position: absolute;z-index: 1;}
@@ -265,14 +266,14 @@
 	h4.mec-form-subtitle{font-size: 15px; margin-top:0;}
 	/* dashboard */
 	#webnus-dashboard * {box-sizing: border-box;}
-	#webnus-dashboard.about-wrap { max-width: 1240px; margin: 0 auto;}
+	#webnus-dashboard.about-wrap { max-width: 1240px; margin: 25px auto 20px;}
         #webnus-dashboard .change-log{word-wrap: break-word;}
 	#webnus-dashboard .welcome-head img{border: none;}
 	.w-welcome {position: relative; margin-top: 30px; margin-bottom:10px;}
 	.w-box {position: relative; background: #fff; padding: 5px 25px; margin-top: 30px;}
 	.w-theme-version { box-shadow: 0 3px 30px -4px #40d8f0; text-shadow: none; background: #40d8f0; background: linear-gradient(95deg,#40d8f0 0,#2dd1ea 50%,#13cbe8 100%); text-align:center;  display: block; padding: 10px 0; color: #fff; font-weight: 600; margin-top: 10px; border-radius: 2px;}
-	.w-box {padding: 0; min-height: 310px; box-shadow: 0 1px 6px rgba(0,0,0,0.039);}
-	.w-box, .wns-be-group-tab .w-box {box-shadow:none}
+	.w-box {padding: 0; min-height: 310px; box-shadow: 0 1px 16px rgba(0,0,0,.034); border-radius: 2px;}
+	/* .w-box, .wns-be-group-tab .w-box {box-shadow:none} */
 	.w-box-head {font-weight: 600; padding: 20px 72px; position: relative; border-bottom: 2px solid #008aff; font-size: 20px;}
 	.w-box-head span {position: absolute; left: 0; padding: 0 25px; line-height: 58px; background: #008aff; height: 100%; top: 0; color: #fff;}
 	.w-box-content,.w-box-child { padding: 18px; line-height: 24px; font-size: 14px; }
@@ -299,7 +300,7 @@
 	.w-box-content pre { text-align: left; background: #f5f5f5; font-size: 13px; padding: 20px 25px; height: 480px; overflow-y: scroll; }
 	.w-box.change-log .w-box-head {color: #01c6d9;}
 
-	#webnus-dashboard .button { border: 0; background: transparent; box-shadow: none; color: #e74c3c; font-weight: 700; } 
+	#webnus-dashboard .button:not(.mec-intro-section-link-tag) { border: 0; background: transparent; box-shadow: none; color: #e74c3c; font-weight: 700; } 
 	.w-box .state { position: absolute; top: 0; left: -100vw; }
 	#webnus-dashboard .button:hover {color: #222;}
 	.w-box .state:checked ~ .content { -webkit-transform: none; -ms-transform: none; transform: none; }
@@ -367,6 +368,8 @@
 	#mec_settings_default_skin_archive,#mec_settings_default_skin_category{ min-width: 225px; }
 	.w-welcome p span { background: #fff; padding: 4px 10px;}
 	#mec_masonry_skin_options_container .mec-form-row .description { margin-left: 0; padding-left: 0; border: none; margin-top: -4px; }
+
+	@media (max-width:1280px) { span.mec-archive-skins, span.mec-category-skins { margin-left: 0; } }
 
 	/*!
 	 * Bootstrap v3.3.7 (http://getbootstrap.com)
@@ -789,7 +792,8 @@
 		box-shadow: 0 5px 23px -7px rgba(0, 0, 0, .5);
 	}
 
-	#MECActivation .MECPurchaseStatus {
+	#MECActivation .MECPurchaseStatus,
+	.addon-activation-form .MECPurchaseStatus {
 		display: inline-block;
 		width: 40px;
 		height: 40px;
@@ -845,12 +849,14 @@
 		transform: rotate(-45deg);
 	}
 
-	#MECActivation .MECPurchaseStatus.PurchaseError {
+	#MECActivation .MECPurchaseStatus.PurchaseError,
+	.addon-activation-form .MECPurchaseStatus.PurchaseError {
 		background: #ff876c;
 		background: linear-gradient(95deg, #ff876c 0%, #ff7455 50%, #ff5a35 100%);
 		box-shadow: 0 5px 10px -5px #ff876c;
 	}
-	#MECActivation .MECPurchaseStatus.PurchaseSuccess {
+	#MECActivation .MECPurchaseStatus.PurchaseSuccess,
+	.addon-activation-form .MECPurchaseStatus.PurchaseSuccess {
 		background: #4cbf67;
 		background: linear-gradient(95deg, #6fe08a 0%, #58cf74 50%, #36cb58 100%);
 		box-shadow: 0 5px 10px -5px #4cbf67;
@@ -893,10 +899,35 @@
 		animation-delay: -1.0s;
 	}
 
-	#MECActivation .MECLicenseMessage {
+	#MECActivation .MECLicenseMessage,
+	.addon-activation-form .MECLicenseMessage {
 		margin-top: 24px;
 		color: #f64;
 		max-width: 570px;
+	}
+
+	.box-addon-activation-toggle-head,
+	.box-addon-activation-toggle-content {
+		display: none;
+	}
+
+	.addon-activation-form h3 {
+		font-size: 15px;
+		font-weight: normal;
+		margin: 34px 0 -7px;
+	}
+
+	.box-addon-activation-toggle-head {
+		line-height: 1.5;
+		font-size: 16px;
+		margin-top: 20px;
+		cursor: pointer;
+	}
+
+	.box-addon-activation-toggle-head i {
+		margin-right: 7px;
+		cursor: pointer;
+		font-weight: bold;
 	}
 
 	@-webkit-keyframes sk-bounce {
@@ -944,14 +975,16 @@
 	}
 
 	.mec-addon-box-version {
-		position: absolute;
-		top: 0;
-		right: 0;
+		position: relative;
 		background: #eaeaea;
-		border-radius: 50px;
-		padding: 0 11px;
+		border-radius: 1px;
+		padding: 0 8px;
 		color: #5a5a5a;
-		font-size: 12px;
+		font-size: 11px;
+		letter-spacing: 0.2px;
+		line-height: 21px;
+		display: inline-block;
+		margin: 3px 0;
 	}
 
 	.mec-addon-box-title {
@@ -1050,7 +1083,7 @@
 		color: #fff;
 	}
 
-	.addons-page-notice {
+	.addons-page-notice,.addons-page-error {
 		display: block;
 		margin-top: 15px;
 		margin-bottom: 0;
@@ -1060,10 +1093,14 @@
 		padding: 1px 12px;
 	}
 
-	.addons-page-notice p {
+	.addons-page-notice p,.addons-page-error p {
 		margin: 0.5em 0;
 		padding: 2px;
 		font-size: 13px;
+	}
+
+	.addons-page-error {
+		border-left-color: #dc3232;
 	}
 
 	.mec-addon-box-comingsoon {
@@ -1075,6 +1112,9 @@
 		text-align: center;
 	}
 
+	.mec-addons .w-row .w-col-sm-3:nth-child(4n+1) {
+		clear: left
+	}
 
 	@media (min-width: 960px) {
 		#webnus-dashboard .mec-addon-box-footer .w-button {
@@ -1101,6 +1141,245 @@
 		text-align: center;
 	}
 	.mec-intro-section .w-box-content.mec-intro-section-welcome {
-		max-width: 500px;
+		max-width: 600px;
 		margin: 0 auto;
 	}
+
+	.mec-intro-section .w-box-content.mec-intro-section-welcome h3 {
+		font-size: 27px;
+	}
+
+	a.mec-intro-section-link-tag.button.button-hero {
+		margin: 0 10px 40px;
+	}
+
+	a.mec-intro-section-link-tag.button.button-primary.button-hero {
+		color: #fff !important;
+	}
+
+	a.mec-intro-section-link-tag.button.button-secondary.button-hero {
+		color: #000 !important;
+	}
+	
+	.mec-intro-section-ifarme iframe {
+		border: 1px solid #e7e7e7;
+		border-radius: 3px;
+		padding: 10px;
+		box-shadow: 0 3px 10px -6px rgba(0, 0, 0, 0.2);
+	}
+
+	.w-box-content.mec-intro-section-welcome p {
+		margin-bottom: 0;
+	}
+
+	/* remove focus link & fix owerflow on setting panel */
+	.mec-tooltip a:focus {
+		box-shadow: none;
+	}
+	#mec_settings_form .mec-options-fields {
+		padding-bottom: 150px !important;
+	}
+	#mec_taxes_fees_container_toggle {
+		margin-bottom: 60px;
+	}
+
+	#mec_settings_form .mec-options-fields {
+		padding-bottom: 150px !important;
+	}
+
+	#mec_taxes_fees_container_toggle {
+		margin-bottom: 60px;
+	}
+
+	/* Tooltip New Style */
+	.mec-tooltip:hover:before,
+	.mec-tooltip:hover:after {
+	display: none;
+	}
+
+	.mec-tooltip {
+		display: inline-flex;
+		bottom: 12px;
+	}
+
+	.mec-tooltip .box {
+		min-width: 300px;
+		max-width: 600px;
+		display: inline-block;
+		left: 26px;
+		top: 50%;
+		transform: translateY(-50%);
+		padding: 0;
+		margin-top: 8px;
+		background-color: #535a61;
+		color: #fff;
+		font-weight: 300;
+		font-size: 14px;
+		letter-spacing: .5px;
+		line-height: 1.5;
+		position: absolute;
+		z-index: 9999999;
+		box-sizing: border-box;
+		border-radius: 6px;
+		box-shadow: 0 4px 45px -8px #444b50;
+		visibility: hidden;
+		opacity: 0;
+		transition: opacity .23s;
+	}
+
+	.mec-tooltip:hover .box{
+		visibility: visible;
+		opacity: 1;
+	}
+
+	.mec-tooltip:hover .box {
+		padding: 20px;
+		border-radius: 8px;
+	}
+
+	.mec-tooltip .box h5 {
+		color: #fff;
+		font-size: 17px;
+		font-weight: 600;
+		margin: -30px -20px;
+		padding: 20px 0;
+		text-align: center;
+		margin-bottom: 10px;
+		background: #3a3f44;
+		border-bottom: 1px solid #32363a;
+		border-radius: 6px 6px 0 0;
+		z-index: 9999;
+	}
+
+	.mec-tooltip .box a {
+		color: #09f;
+		margin-left: 0;
+		font-weight: 400;
+		position: relative;
+		text-decoration: none;
+		display: block;
+	}
+
+	.mec-tooltip .box a:hover {
+		color: #f90;
+	}
+
+	.mec-tooltip .box:after {
+		display: block;
+		position: absolute !important;
+		top: 100% !important;
+		right: 50% !important;
+		margin-top: -6px !important;
+		margin-right: -6px !important;
+		width: 12px !important;
+		height: 24px !important;
+		overflow: hidden !important;
+		transform: rotate(-90deg) !important;
+	}
+
+	.mec-tooltip .box:before {
+		display: block;    
+		content: '' !important;
+		position: absolute !important;
+		width: 12px;
+		height: 12px;
+		left: -10px !important;
+		top: 50% !important;
+		transform: translate(50%,-50%) rotate(-45deg) !important;
+		background-color: #535a61 !important;
+		box-shadow: 0 8px 9px -4px #535a61 !important;
+		z-index: 0 !important;
+	}
+
+	/* IF add top or bottom or left class to box DIV, so can change view of tooltip <div class="box TOP BOTTOM"> */
+	/* Default Tooltip open on right */
+	/* Tooltip Top */
+	.mec-tooltip .box.top {
+		left: 50%;
+		top: 0;
+		transform: translate(-50%, -100%);
+		margin-top: 0px;
+		margin-left: -10px;
+	}
+
+	.mec-tooltip .box.top:after {
+		top: 50% !important;
+		right: 100% !important;
+	}
+
+	.mec-tooltip .box.top:before {
+		left: 50% !important;
+		top: 100% !important;
+	}
+
+	/* Tooltip Bottom */
+	.mec-tooltip .box.bottom {
+		left: 50%;
+		top: auto;
+		bottom: 0;
+		transform: translate(-50%, 100%);
+		margin-bottom: -20px;
+		margin-left: -10px;
+	}
+
+	.mec-tooltip .box.bottom:after {
+		top: 0 !important;
+		right: 50% !important;
+		background-color: #3a3f44 !important;    
+	}
+
+	.mec-tooltip .box.bottom:before {
+		left: 50% !important;
+		top: -7px !important;
+		transform: translateX(-50%);
+		background-color: #3a3f44 !important;
+	}	
+
+	/* Tooltip Left */
+	.mec-tooltip .box.left {
+		left: auto;
+		right: 26px;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	
+	.mec-tooltip .box.left:before {
+		right: 0 !important;
+		left: auto !important;
+		top: 50% !important;
+	}
+
+	@media(min-width:1200px) and (max-width:1366px) {
+
+		.mec-tooltip .box.left {
+			left: 50%;
+			top: 0;
+			transform: translate(-50%, -100%);
+			margin-top: 0px;
+			margin-left: -10px;
+		}
+
+		.mec-tooltip .box.left:after {
+			top: 50% !important;
+			right: 100% !important;
+		}
+
+		.mec-tooltip .box.left:before {
+			left: 50% !important;
+			top: 100% !important;
+		}
+
+		.mec-tooltip .box {
+			min-width: 225px;
+		}
+
+		.mec-tooltip .box h5 {
+			font-size: 15px;
+		}
+
+		.mec-tooltip .box .content {
+			font-size: 12px;
+		}
+
+	}
+	

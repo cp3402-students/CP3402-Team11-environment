@@ -29,7 +29,6 @@ class WINPUpdate020200 extends Wbcr_Factory413_Update {
 		}
 
 		$this->new_migration();
-		WINP_Helper::flush_page_cache();
 	}
 
 	public function new_migration() {
@@ -108,15 +107,14 @@ class WINPUpdate020200 extends Wbcr_Factory413_Update {
 				$snippet_code = WINP_Helper::getMetaOption( $snippet->ID, 'snippet_code' );
 
 				if ( ! empty( $snippet_code ) ) {
-					$result = wp_update_post( [
-						'ID'           => (int) $snippet->ID,
-						'post_type'    => WINP_SNIPPETS_POST_TYPE,
+					$wpdb->update( $wpdb->posts, [
 						'post_content' => $snippet_code
-					] );
+					], [
+						'ID'        => (int) $snippet->ID,
+						'post_type' => WINP_SNIPPETS_POST_TYPE
+					], [ '%s' ], [ '%d', '%s' ] );
 
-					//if ( ! is_wp_error( $result ) && $result ) {
-						//WINP_Helper::removeMetaOption( $snippet->ID, 'snippet_code' );
-					//}
+					WINP_Helper::updateMetaOption( $snippet->ID, 'snippet_code_moved', 1 );
 				}
 
 				unset( $snippet_code );

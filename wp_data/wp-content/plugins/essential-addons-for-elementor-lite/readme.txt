@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 2.10.5
+Stable tag: 3.0.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -70,12 +70,8 @@ We have designed 29 of the most useful widgets to enhance your Elementor Page Bu
 28. [Progress Bar](https://essential-addons.com/elementor/progress-bar/) - Display progress bars with 4+ different styles
 29. [Feature List](https://essential-addons.com/elementor/feature-list/) - Display feature lists with custom icons and styles
 
-Extensions: 
 
-1. [Particle Effect](https://essential-addons.com/elementor/particle-effect/) - Add creative particle effects to your section, your visitors will love it.
-
-
-### More elements (29+) on [Premium Version](https://essential-addons.com/elementor/buy.php)
+### More elements (29+) on [Premium Version](https://wpdeveloper.net/in/upgrade-essential-addons-elementor)
 
 1. [Post Block (Flex)](https://essential-addons.com/elementor/post-block/) - Display your blog posts with variety of styles with the power of modern CSS Flexbox
 2. [Lightbox & Modal](https://essential-addons.com/elementor/lightbox-modal/) - Create Modal Popup which opens after certain actions.
@@ -107,9 +103,11 @@ Extensions:
 28. [Advanced Menu](https://essential-addons.com/elementor/advanced-menu/) - Use advanced navigation menu anywhere. Choose design from different skins and customize.
 29. [Image Scroller](https://essential-addons.com/elementor/image-scroller/) - Show your panaromic or long height images within image scroller widget.
 
-Extensions: 
+Extensions (Pro): 
 
 1. [Parallax Scrolling](https://essential-addons.com/elementor/parallax-scrolling/) - Add creative parallax scrolling effects to your section, your visitors will love it.
+2. [Particle Effect](https://essential-addons.com/elementor/particle-effect/) - Add creative particle effects to your section, your visitors will love it.
+3. [Advanced Tooltip](https://essential-addons.com/elementor/advanced-tooltip/) - Make any widget more informative with Advanced Tooltip.
 
 
 More coming soon (weekly update) ...
@@ -168,14 +166,10 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 2.10.5 - 28/04/2019 =
-- Fixed: Dynamic assets loading protocol
-- Improved: Fancy Text element
-- Few minor bugfix and improvements
-
-= 2.10.4 - 18/04/2019 =
-- Fixed: Fatal error for flatsome theme 
-- Few minor bugfix and improvements
+= 3.0.0 - 22/05/2019 =
+- Refractored code for better performance
+- Minimized dependencies to keep the plugin lighter
+- Lots of bugfix and improvements
 
 = 2.10.3 - 16/04/2019 =
 - Fixed: assets not loading on archive pages

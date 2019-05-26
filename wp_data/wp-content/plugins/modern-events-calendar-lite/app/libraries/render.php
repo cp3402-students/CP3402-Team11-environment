@@ -590,7 +590,7 @@ class MEC_render extends MEC_base
         {
             $dates[] = array(
                 'start'=>$start_date,
-                'end'=>$finish_date,
+                'end'=>$end_date,
                 'allday'=>$allday,
                 'hide_time'=>$hide_time,
                 'past'=>$past
@@ -613,7 +613,7 @@ class MEC_render extends MEC_base
                 else $remained_days_to_next_repeat = $repeat_interval - ($passed_days%$repeat_interval);
 
                 $start_date = date('Y-m-d', strtotime('+'.$remained_days_to_next_repeat.' Days', strtotime($today)));
-                if(!in_array($start_date, $exceptional_days)) $dates[] = array(
+                if(!$this->main->is_past($finish_date['date'], $start_date) and !in_array($start_date, $exceptional_days)) $dates[] = array(
                     'start'=>array('date'=>$start_date, 'hour'=>$event->meta['mec_date']['start']['hour'], 'minutes'=>$event->meta['mec_date']['start']['minutes'], 'ampm'=>$event->meta['mec_date']['start']['ampm']),
                     'end'=>array('date'=>date('Y-m-d', strtotime('+'.$event_period_days.' Days', strtotime($start_date))), 'hour'=>$event->meta['mec_date']['end']['hour'], 'minutes'=>$event->meta['mec_date']['end']['minutes'], 'ampm'=>$event->meta['mec_date']['end']['ampm']),
                     'allday'=>$allday,

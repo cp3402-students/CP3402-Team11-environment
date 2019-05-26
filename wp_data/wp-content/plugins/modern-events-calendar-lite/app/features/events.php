@@ -125,7 +125,7 @@ class MEC_feature_events extends MEC_base {
 	 */
 	public function register_post_type() {
 		// Get supported features for event post type
-		$supports = apply_filters( 'mec_event_supports', array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments' ) );
+		$supports = apply_filters( 'mec_event_supports', array( 'editor', 'title', 'excerpt', 'author', 'thumbnail', 'comments' ) );
 
 		register_post_type(
 			$this->PT,
@@ -151,6 +151,8 @@ class MEC_feature_events extends MEC_base {
 					'ep_mask' => EP_MEC_EVENTS,
 				),
 				'supports'      => $supports,
+				'show_in_rest' => true,
+				
 			)
 		);
 
@@ -601,7 +603,16 @@ class MEC_feature_events extends MEC_base {
 				<div class="mec-form-row">
 					<div class="mec-col-4">
 						<input type="text" class="" name="mec[date][comment]" id="mec_comment" placeholder="<?php _e( 'Time Comment', 'modern-events-calendar-lite' ); ?>" value="<?php echo esc_attr( $comment ); ?>" />
-						<a class="mec-tooltip" title="<?php esc_attr_e( 'It shows next to event time on single event page. You can insert Timezone etc. in this field.', 'modern-events-calendar-lite' ); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+						<span class="mec-tooltip">
+							<div class="box top">
+								<h5 class="title"><?php _e('Time Comment', 'modern-events-calendar-lite'); ?></h5>
+								<div class="content">
+									<?php esc_attr_e('It shows next to event time on single event page. You can insert Timezone etc. in this field.', 'modern-events-calendar-lite'); ?>
+									<a href="https://webnus.net/dox/modern-events-calendar/add-event/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+								</div>    
+							</div>
+							<i title="" class="dashicons-before dashicons-editor-help"></i>
+						</span>	  										
 					</div>
 				</div>
 			</div>
@@ -688,7 +699,16 @@ class MEC_feature_events extends MEC_base {
 								<input type="text" id="mec_exceptions_in_days_start_date" value="" placeholder="<?php _e( 'Start', 'modern-events-calendar-lite' ); ?>" class="mec_date_picker" />
 								<input type="text" id="mec_exceptions_in_days_end_date" value="" placeholder="<?php _e( 'End', 'modern-events-calendar-lite' ); ?>" class="mec_date_picker" />
 								<button class="button" type="button" id="mec_add_in_days"><?php _e( 'Add', 'modern-events-calendar-lite' ); ?></button>
-								<a class="mec-tooltip" title="<?php esc_attr_e( 'Add certain days to event occurrence dates.', 'modern-events-calendar-lite' ); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+								<span class="mec-tooltip">
+									<div class="box top">
+										<h5 class="title"><?php _e('Custom Days Repeating', 'modern-events-calendar-lite'); ?></h5>
+										<div class="content">
+											<?php esc_attr_e('Add certain days to event occurrence dates. If you have single day event, start and end date should be the same, If you have multiple day event the start and end dates must be commensurate with the initial date.', 'modern-events-calendar-lite'); ?>
+											<a href="https://webnus.net/dox/modern-events-calendar/date-and-time/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+										</div>    
+									</div>
+									<i title="" class="dashicons-before dashicons-editor-help"></i>
+								</span>	  										
 							</div>
 						</div>
 						<div class="mec-form-row mec-certain-day" id="mec_in_days">
@@ -748,7 +768,16 @@ endforeach;
 								<label for="mec_repeat_ends_occurrences"><?php _e( 'After', 'modern-events-calendar-lite' ); ?></label>
 							</div>
 							<input class="mec-col-2" type="text" name="mec[date][repeat][end_at_occurrences]" id="mec_date_repeat_end_at_occurrences" placeholder="<?php _e( 'Occurrences times', 'modern-events-calendar-lite' ); ?>"  value="<?php echo esc_attr( ( $repeat_end_at_occurrences + 1 ) ); ?>" />
-							<a class="mec-tooltip" title="<?php esc_attr_e( 'The event will finish after certain repeats. For example if you set it to 10, the event will finish after 10 repeats.', 'modern-events-calendar-lite' ); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+							<span class="mec-tooltip">
+								<div class="box top">
+									<h5 class="title"><?php _e('Occurrences times', 'modern-events-calendar-lite'); ?></h5>
+									<div class="content">
+										<?php esc_attr_e('The event will finish after certain repeats. For example if you set it to 10, the event will finish after 10 repeats.', 'modern-events-calendar-lite'); ?>
+										<a href="https://webnus.net/dox/modern-events-calendar/date-and-time/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+									</div>    
+								</div>
+								<i title="" class="dashicons-before dashicons-editor-help"></i>
+							</span>	  									
 						</div>
 					</div>
 				</div>
@@ -780,7 +809,16 @@ endforeach;
 						<div class="mec-col-6">
 							<input type="text" id="mec_exceptions_not_in_days_date" value="" placeholder="<?php _e( 'Date', 'modern-events-calendar-lite' ); ?>" class="mec_date_picker" />
 							<button class="button" type="button" id="mec_add_not_in_days"><?php _e( 'Add', 'modern-events-calendar-lite' ); ?></button>
-							<a class="mec-tooltip" title="<?php esc_attr_e( 'Exclude certain days from event occurrence dates.', 'modern-events-calendar-lite' ); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+							<span class="mec-tooltip">
+								<div class="box top">
+									<h5 class="title"><?php _e('Exclude certain days', 'modern-events-calendar-lite'); ?></h5>
+									<div class="content">
+										<?php esc_attr_e('Exclude certain days from event occurrence dates. Please note that you can exclude only single day occurrences and you cannot exclude one day from multiple day occurrences.', 'modern-events-calendar-lite'); ?>
+										<a href="https://webnus.net/dox/modern-events-calendar/exceptional-days/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+									</div>    
+								</div>
+								<i title="" class="dashicons-before dashicons-editor-help"></i>
+							</span>	  									
 						</div>
 					</div>
 					<div class="mec-form-row mec-certain-day" id="mec_not_in_days">
@@ -976,7 +1014,16 @@ endforeach;
 			<div class="mec-form-row">
 				<label class="mec-col-2" for="mec_read_more_link"><?php echo $this->main->m( 'read_more_link', __( 'Event Link', 'modern-events-calendar-lite' ) ); ?></label>
 				<input class="mec-col-7" type="text" name="mec[read_more]" id="mec_read_more_link" value="<?php echo esc_attr( $read_more ); ?>" placeholder="<?php _e( 'eg. http://yoursite.com/your-event', 'modern-events-calendar-lite' ); ?>" />
-				<a class="mec-tooltip" title="<?php esc_attr_e( 'If you fill it, it will be replaced instead of default event page link. Insert full link including http(s)://', 'modern-events-calendar-lite' ); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+				<span class="mec-tooltip">
+					<div class="box top">
+						<h5 class="title"><?php _e('Event Link', 'modern-events-calendar-lite'); ?></h5>
+						<div class="content">
+							<?php esc_attr_e('If you fill it, it will be replaced instead of default event page link. Insert full link including http(s):// - Also, if you use advertising URL, can use URL Shortener', 'modern-events-calendar-lite'); ?>
+							<a href="https://bit.ly/" target="_blank"><?php _e('URL Shortener', 'modern-events-calendar-lite'); ?></a>
+						</div>    
+					</div>
+					<i title="" class="dashicons-before dashicons-editor-help"></i>
+				</span>	  						
 			</div>
 			<div class="mec-form-row">
 				<label class="mec-col-2" for="mec_more_info_link"><?php echo $this->main->m( 'more_info_link', __( 'More Info', 'modern-events-calendar-lite' ) ); ?></label>
@@ -986,7 +1033,16 @@ endforeach;
 					<option value="_self" <?php echo ( $more_info_target == '_self' ? 'selected="selected"' : '' ); ?>><?php _e( 'Current Window', 'modern-events-calendar-lite' ); ?></option>
 					<option value="_blank" <?php echo ( $more_info_target == '_blank' ? 'selected="selected"' : '' ); ?>><?php _e( 'New Window', 'modern-events-calendar-lite' ); ?></option>
 				</select>
-				<a class="mec-tooltip" title="<?php esc_attr_e( 'If you fill it, it will be shown in event details page as an optional link. Insert full link including http(s)://', 'modern-events-calendar-lite' ); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+				<span class="mec-tooltip">
+					<div class="box top">
+						<h5 class="title"><?php _e('More Info', 'modern-events-calendar-lite'); ?></h5>
+						<div class="content">
+							<?php esc_attr_e('If you fill it, it will be shown in event details page as an optional link. Insert full link including http(s)://', 'modern-events-calendar-lite'); ?>
+							<a href="https://webnus.net/dox/modern-events-calendar/add-event/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+						</div>    
+					</div>
+					<i title="" class="dashicons-before dashicons-editor-help"></i>
+				</span>	  						
 			</div>
 		</div>
 		<?php
@@ -1038,6 +1094,17 @@ endforeach;
 																																		?>
 					" />
 				</div>
+				<span class="mec-tooltip">
+					<div class="box">
+						<h5 class="title"><?php _e('Total booking limits', 'modern-events-calendar-lite'); ?></h5>
+						<div class="content">
+							<?php esc_attr_e('If you want to set a limit to all tickets, uncheck this checkbox and put a limitation number.', 'modern-events-calendar-lite'); ?>
+							<a href="https://webnus.net/dox/modern-events-calendar/total-booking-limits/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+							<a href="https://webnus.net/dox/modern-events-calendar/add-a-booking-system/" target="_blank"><?php _e('Read About A Booking System', 'modern-events-calendar-lite'); ?></a>
+						</div>    
+					</div>
+					<i title="" class="dashicons-before dashicons-editor-help"></i>
+				</span>	 					
 			</div>
 		</div>
 		<?php
@@ -1162,11 +1229,29 @@ endforeach;
 						<div class="mec-form-row">
 							<span class="mec-col-4">
 								<input type="text" name="mec[tickets][<?php echo $key; ?>][price]" placeholder="<?php esc_attr_e( 'Price', 'modern-events-calendar-lite' ); ?>" value="<?php echo ( isset( $ticket['price'] ) ? esc_attr( $ticket['price'] ) : '' ); ?>" />
-								<a class="mec-tooltip" title="<?php esc_attr_e( 'Insert 0 for free ticket. Only numbers please.', 'modern-events-calendar-lite' ); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+								<span class="mec-tooltip">
+									<div class="box top">
+										<h5 class="title"><?php _e('Price', 'modern-events-calendar-lite'); ?></h5>
+										<div class="content">
+											<?php esc_attr_e('Insert 0 for free ticket. Only numbers please.', 'modern-events-calendar-lite'); ?>
+											<a href="https://webnus.net/dox/modern-events-calendar/add-a-booking-system/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+										</div>    
+									</div>
+									<i title="" class="dashicons-before dashicons-editor-help"></i>
+								</span>	  										
 							</span>
 							<span class="mec-col-8">
 								<input type="text" name="mec[tickets][<?php echo $key; ?>][price_label]" placeholder="<?php esc_attr_e( 'Price Label', 'modern-events-calendar-lite' ); ?>" value="<?php echo ( isset( $ticket['price_label'] ) ? esc_attr( $ticket['price_label'] ) : '' ); ?>" class="mec-col-12" />
-								<a class="mec-tooltip" title="<?php esc_attr_e( 'For showing on website. e.g. $15', 'modern-events-calendar-lite' ); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+								<span class="mec-tooltip">
+									<div class="box top">
+										<h5 class="title"><?php _e('Price Label', 'modern-events-calendar-lite'); ?></h5>
+										<div class="content">
+											<?php esc_attr_e('For showing on website. e.g. $15', 'modern-events-calendar-lite'); ?>
+											<a href="https://webnus.net/dox/modern-events-calendar/add-a-booking-system/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+										</div>    
+									</div>
+									<i title="" class="dashicons-before dashicons-editor-help"></i>
+								</span>	  										
 							</span>
 						</div>
 						<div class="mec-form-row">
@@ -1287,11 +1372,29 @@ endforeach;
 					<div class="mec-form-row">
 						<span class="mec-col-4">
 							<input type="text" name="mec[tickets][:i:][price]" placeholder="<?php esc_attr_e( 'Price', 'modern-events-calendar-lite' ); ?>" />
-							<a class="mec-tooltip" title="<?php esc_attr_e( 'Insert 0 for free ticket. Only numbers please.', 'modern-events-calendar-lite' ); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+							<span class="mec-tooltip">
+								<div class="box top">
+									<h5 class="title"><?php _e('Price', 'modern-events-calendar-lite'); ?></h5>
+									<div class="content">
+										<?php esc_attr_e('Insert 0 for free ticket. Only numbers please.', 'modern-events-calendar-lite'); ?>
+										<a href="https://webnus.net/dox/modern-events-calendar/add-a-booking-system/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+									</div>    
+								</div>
+								<i title="" class="dashicons-before dashicons-editor-help"></i>
+							</span>	  								
 						</span>
 						<span class="mec-col-8">
 							<input type="text" name="mec[tickets][:i:][price_label]" placeholder="<?php esc_attr_e( 'Price Label', 'modern-events-calendar-lite' ); ?>" class="mec-col-12" />
-							<a class="mec-tooltip" title="<?php esc_attr_e( 'For showing on website. e.g. $15', 'modern-events-calendar-lite' ); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+							<span class="mec-tooltip">
+								<div class="box top">
+									<h5 class="title"><?php _e('Price Label', 'modern-events-calendar-lite'); ?></h5>
+									<div class="content">
+										<?php esc_attr_e('For showing on website. e.g. $15', 'modern-events-calendar-lite'); ?>
+										<a href="https://webnus.net/dox/modern-events-calendar/add-a-booking-system/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+									</div>    
+								</div>
+								<i title="" class="dashicons-before dashicons-editor-help"></i>
+							</span>	  								
 						</span>
 					</div>
 					<div class="mec-form-row">
@@ -1390,7 +1493,16 @@ endforeach;
 							<div class="mec-form-row">
 								<span class="mec-col-4">
 									<input type="text" name="mec[fees][<?php echo $i; ?>][amount]" placeholder="<?php esc_attr_e( 'Amount', 'modern-events-calendar-lite' ); ?>" value="<?php echo ( isset( $fee['amount'] ) ? esc_attr( $fee['amount'] ) : '' ); ?>" />
-									<a class="mec-tooltip" title="<?php esc_attr_e( 'Fee amount, considered as fixed amount if you set the type to amount otherwise considered as percentage', 'modern-events-calendar-lite' ); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+									<span class="mec-tooltip">
+										<div class="box top">
+											<h5 class="title"><?php _e('Amount', 'modern-events-calendar-lite'); ?></h5>
+											<div class="content">
+												<?php esc_attr_e('Fee amount, considered as fixed amount if you set the type to amount otherwise considered as percentage', 'modern-events-calendar-lite'); ?>
+												<a href="https://webnus.net/dox/modern-events-calendar/tickets-and-taxes-fees/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+											</div>    
+										</div>
+										<i title="" class="dashicons-before dashicons-editor-help"></i>
+									</span>	  										
 								</span>
 								<span class="mec-col-4">
 									<select name="mec[fees][<?php echo $i; ?>][type]">
@@ -1415,7 +1527,16 @@ endforeach;
 					<div class="mec-form-row">
 						<span class="mec-col-4">
 							<input type="text" name="mec[fees][:i:][amount]" placeholder="<?php esc_attr_e( 'Amount', 'modern-events-calendar-lite' ); ?>" />
-							<a class="mec-tooltip" title="<?php esc_attr_e( 'Fee amount, considered as fixed amount if you set the type to amount otherwise considered as percentage', 'modern-events-calendar-lite' ); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+							<span class="mec-tooltip">
+								<div class="box top">
+									<h5 class="title"><?php _e('Amount', 'modern-events-calendar-lite'); ?></h5>
+									<div class="content">
+										<?php esc_attr_e('Fee amount, considered as fixed amount if you set the type to amount otherwise considered as percentage', 'modern-events-calendar-lite'); ?>
+										<a href="https://webnus.net/dox/modern-events-calendar/tickets-and-taxes-fees/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+									</div>    
+								</div>
+								<i title="" class="dashicons-before dashicons-editor-help"></i>
+							</span>	  								
 						</span>
 						<span class="mec-col-4">
 							<select name="mec[fees][:i:][type]">
@@ -1493,11 +1614,29 @@ endforeach;
 								<div class="mec-form-row">
 									<span class="mec-col-4">
 										<input type="text" name="mec[ticket_variations][<?php echo $i; ?>][price]" placeholder="<?php esc_attr_e( 'Price', 'modern-events-calendar-lite' ); ?>" value="<?php echo ( isset( $ticket_variation['price'] ) ? esc_attr( $ticket_variation['price'] ) : '' ); ?>" />
-										<a class="mec-tooltip" title="<?php esc_attr_e( 'Option Price', 'modern-events-calendar-lite' ); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+										<span class="mec-tooltip">
+											<div class="box top">
+												<h5 class="title"><?php _e('Price', 'modern-events-calendar-lite'); ?></h5>
+												<div class="content">
+													<?php esc_attr_e('Option Price', 'modern-events-calendar-lite'); ?>
+													<a href="https://webnus.net/dox/modern-events-calendar/ticket-variations/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+												</div>    
+											</div>
+											<i title="" class="dashicons-before dashicons-editor-help"></i>
+										</span>	  											
 									</span>
 									<span class="mec-col-4">
 										<input type="number" min="0" name="mec[ticket_variations][<?php echo $i; ?>][max]" placeholder="<?php esc_attr_e( 'Maximum Per Ticket', 'modern-events-calendar-lite' ); ?>" value="<?php echo ( isset( $ticket_variation['max'] ) ? $ticket_variation['max'] : '' ); ?>" />
-										<a class="mec-tooltip" title="<?php esc_attr_e( 'Maximum Per Ticket. Leave it blank for unlimited.', 'modern-events-calendar-lite' ); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+										<span class="mec-tooltip">
+											<div class="box top">
+												<h5 class="title"><?php _e('Maximum Per Ticket', 'modern-events-calendar-lite'); ?></h5>
+												<div class="content">
+													<?php esc_attr_e('Maximum Per Ticket. Leave it blank for unlimited.', 'modern-events-calendar-lite'); ?>
+													<a href="https://webnus.net/dox/modern-events-calendar/ticket-variations/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+												</div>    
+											</div>
+											<i title="" class="dashicons-before dashicons-editor-help"></i>
+										</span>	  											
 									</span>
 									<button class="button" type="button" id="mec_remove_ticket_variation_button<?php echo $i; ?>" onclick="mec_remove_ticket_variation(<?php echo $i; ?>);"><?php _e( 'Remove', 'modern-events-calendar-lite' ); ?></button>
 								</div>
@@ -1515,11 +1654,29 @@ endforeach;
 					<div class="mec-form-row">
 						<span class="mec-col-4">
 							<input type="text" name="mec[ticket_variations][:i:][price]" placeholder="<?php esc_attr_e( 'Price', 'modern-events-calendar-lite' ); ?>" />
-							<a class="mec-tooltip" title="<?php esc_attr_e( 'Option Price', 'modern-events-calendar-lite' ); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+							<span class="mec-tooltip">
+								<div class="box top">
+									<h5 class="title"><?php _e('Price', 'modern-events-calendar-lite'); ?></h5>
+									<div class="content">
+										<?php esc_attr_e('Option Price', 'modern-events-calendar-lite'); ?>
+										<a href="https://webnus.net/dox/modern-events-calendar/ticket-variations/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+									</div>    
+								</div>
+								<i title="" class="dashicons-before dashicons-editor-help"></i>
+							</span>	  								
 						</span>
 						<span class="mec-col-4">
 							<input type="number" min="0" name="mec[ticket_variations][:i:][max]" placeholder="<?php esc_attr_e( 'Maximum Per Ticket', 'modern-events-calendar-lite' ); ?>" value="1" />
-							<a class="mec-tooltip" title="<?php esc_attr_e( 'Maximum Per Ticket. Leave it blank for unlimited.', 'modern-events-calendar-lite' ); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+							<span class="mec-tooltip">
+								<div class="box top">
+									<h5 class="title"><?php _e('Maximum Per Ticket', 'modern-events-calendar-lite'); ?></h5>
+									<div class="content">
+										<?php esc_attr_e('Maximum Per Ticket. Leave it blank for unlimited.', 'modern-events-calendar-lite'); ?>
+										<a href="https://webnus.net/dox/modern-events-calendar/ticket-variations/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+									</div>    
+								</div>
+								<i title="" class="dashicons-before dashicons-editor-help"></i>
+							</span>	  								
 						</span>
 						<button class="button" type="button" id="mec_remove_ticket_variation_button:i:" onclick="mec_remove_ticket_variation(:i:);"><?php _e( 'Remove', 'modern-events-calendar-lite' ); ?></button>
 					</div>
@@ -1973,8 +2130,9 @@ endforeach;
 
 			$weekdays = ',' . implode( ',', $mec_weekends ) . ',';
 		} elseif ( $repeat_type == 'certain_weekdays' ) {
+
 			$repeat_interval = 1;
-			$plus_date       = '+' . $repeat_end_at_occurrences * $repeat_interval . ' Weekdays';
+			$plus_date       = '+' . ceil(($repeat_end_at_occurrences * $repeat_interval) * (7/count($certain_weekdays))) . ' days';
 
 			$weekdays = ',' . implode( ',', $certain_weekdays ) . ',';
 		} elseif ( $repeat_type == 'monthly' ) {

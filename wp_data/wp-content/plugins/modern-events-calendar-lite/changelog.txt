@@ -1,4 +1,17 @@
-﻿v 4.2.2 – 13 May 2019
+﻿v 4.2.3 – 21 May 2019
+- Compatibility: WordPress 5.2.1
+- Added: link to masonry image
+- Added: Gutenberg editor to event edit page
+- Added: Getting started section to dashboard
+- Added: filter to increase/decrease  excerpt lenght
+- Fixed: Calculating end date of "Certain Weekdays" events using occurrence count
+- Fixed: Frontend Event Submission
+- Fixed: Adding a new occurrence date when event reached the end date
+- Fixed: Adding wrong end date when event is past
+- Fixed: Scheduler for generating start time and end time
+- Fixed: Some minor issues
+
+v 4.2.2 – 13 May 2019
 - Fixed: Tag filtering issue
 - Fixed: Displaying attendee email in attendees module
 - Fixed: Google export link to include event description in addition to event title

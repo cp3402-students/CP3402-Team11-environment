@@ -65,7 +65,16 @@ $box_stats = apply_filters('mec_dashboard_box_stats', true);
                         <span><a href="https://wordpress.org/support/plugin/modern-events-calendar-lite/reviews/#new-post" target="_blank"><?php echo _x('Rate the plugin ★★★★★', 'plugin rate', 'modern-events-calendar-lite'); ?></a></span>
                         <?php endif; ?>
                         <?php if(version_compare(MEC_VERSION , $version, '<')): ?>
-                        <a class="mec-tooltip" title="<?php esc_attr_e("Update $version is ready for download.", 'modern-events-calendar-lite'); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+                        <span class="mec-tooltip">
+                            <div class="box">
+                                <h5 class="title"><?php _e('Organizer', 'modern-events-calendar-lite'); ?></h5>
+                                <div class="content">
+                                    <?php esc_attr_e("Update $version is ready for download.", 'modern-events-calendar-lite'); ?>
+                                    <a href="https://webnus.net/dox/modern-events-calendar/category/installation/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+                                </div>    
+                            </div>
+                            <i title="" class="dashicons-before dashicons-editor-help"></i>
+                        </span>	                             
                         <?php endif; ?>
                     </p>
                 </div>
@@ -87,17 +96,22 @@ $box_stats = apply_filters('mec_dashboard_box_stats', true);
         <?php endif; ?>
 
         <div class="w-row">
-            <!-- <div class="w-col-sm-12">
+            <div class="w-col-sm-12">
                 <div class="w-box mec-intro-section">
-                    <div class="w-box-head">
-                        <?php _e('GETTING STARTED', 'modern-events-calendar-lite'); ?>
-                    </div>
                     <div class="w-box-content mec-intro-section-welcome">
-                        <h3><?php _e('Welcome to Modern Events Calendar' , 'modern-events-calendar-lite'); ?></h3>
-                        <p><?php _e('We recommend you watch this 2 minute getting started video, and then try the editor yourself by dragging and dropping elements to create your first page.' , 'modern-events-calendar-lite'); ?></p>
+                        <h3><?php _e('Getting started with Modern Events Calendar' , 'modern-events-calendar-lite'); ?></h3>
+                        <p><?php _e('In this short video, you can learn how to make an event and put a calendar on your website. Please watch this 2 minutes video to the end.' , 'modern-events-calendar-lite'); ?></p>
+                    </div>
+                    <div class="w-box-content mec-intro-section-ifarme">
+                        <iframe width="784" height="441" src="https://www.youtube.com/embed/FV_X341oyiw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>   
+                    </div>
+                    <div class="w-box-content mec-intro-section-links wp-core-ui">
+                        <a class="mec-intro-section-link-tag button button-primary button-hero" href="<?php esc_html_e(admin_url( 'post-new.php?post_type=mec-events' )); ?>" target="_blank"><?php esc_html_e('Add New Event' , 'modern-events-calendar-lite'); ?>
+                        <a class="mec-intro-section-link-tag button button-secondary button-hero" href="<?php esc_html_e(admin_url( 'admin.php?page=MEC-settings' )); ?>" target="_blank"><?php esc_html_e('Settings' , 'modern-events-calendar-lite'); ?>
+                        <a class="mec-intro-section-link-tag button button-secondary button-hero" href="https://webnus.net/dox/modern-events-calendar/" target="_blank"><?php esc_html_e('Documentation' , 'modern-events-calendar-lite'); ?></a>
                     </div>
                 </div>
-            </div> -->
+            </div>
             <?php if($this->getPRO()) : ?>
             <div class="w-col-sm-12">
                 <div class="w-box mec-activation">
@@ -156,6 +170,14 @@ $box_stats = apply_filters('mec_dashboard_box_stats', true);
                                 </div>
                                 <div class="MECLicenseMessage"></div>
                             </form>
+                        </div>
+
+                        <div class="box-addons-activation">
+                            <?php $mec_options = get_option('mec_options'); ?>
+                            <div class="box-addon-activation-toggle-head"><i class="mec-sl-plus"></i><span><?php _e('Activate Addons', 'modern-events-calendar-lite'); ?></span></div>
+                            <div class="box-addon-activation-toggle-content">
+                                <?php do_action( 'addons_activation' ); ?>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -4209,6 +4209,15 @@ class MEC_main extends MEC_base
         // Isotope JS file
         wp_enqueue_script('mec-isotope-script', $this->asset('js/isotope.pkgd.min.js'));
     }
+
+    /**
+     * Load Shuffle assets
+     */
+    public function load_shuffle_assets()
+    {
+        // Shuffle JS file
+        wp_enqueue_script('mec-shuffle-script', $this->asset('js/shuffle.min.js'));
+    }
     
     function get_client_ip()
     {

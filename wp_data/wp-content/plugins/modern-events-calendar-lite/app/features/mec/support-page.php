@@ -246,7 +246,7 @@ wp_enqueue_script('mec-lity-script', $this->main->asset('packages/lity/lity.min.
                 <div class="w-box support-page mec-ticksy">
                     <div class="w-box-content">
                         <p><?php esc_html_e('Webnus is an elite and trusted author with a high percentage of satisfied users. If you have any issues please don\'t hesitate to contact us, we will reply as soon as possible.' , 'modern-events-calendar-lite'); ?></p>
-                        <a href="https://webnus.ticksy.com/" target="_blank"><?php esc_html_e('Go to support forum','modern-events-calendar-lite"'); ?></a>
+                        <a href="https://webnus.ticksy.com/" target="_blank"><?php esc_html_e('Go to support forum','modern-events-calendar-lite'); ?></a>
                     </div>
                 </div>
             </div>

@@ -266,7 +266,7 @@ jQuery(document).ready(function($)
                     content: information,
                 },
                 beforeSend: function () {
-                    $('.LicenseField').append('<div class="wna-spinner-wrap"><div class="wna-spinner"><div class="double-bounce1"></div><div class="double-bounce2"></div></div></div>');
+                    $('#MECActivation .LicenseField').append('<div class="wna-spinner-wrap"><div class="wna-spinner"><div class="double-bounce1"></div><div class="double-bounce2"></div></div></div>');
                 },
                 success: function (response) {
                     if (response == 'success')
@@ -282,6 +282,19 @@ jQuery(document).ready(function($)
                     }
                 },
             });
+        });
+    }
+
+    /* Addons Activation */
+    if ($('.box-addon-activation-toggle-head').length > 0)
+    {
+        $('.box-addon-activation-toggle-head').on('click', function() {
+            $('.box-addon-activation-toggle-content').slideToggle('slow'); 
+            if ($(this).find('i').hasClass('mec-sl-plus')){
+                $(this).find('i').removeClass('mec-sl-plus').addClass('mec-sl-minus');
+            } else if ($(this).find('i').hasClass('mec-sl-minus') ) {
+                $(this).find('i').removeClass('mec-sl-minus').addClass('mec-sl-plus');
+            }
         });
     }
 });

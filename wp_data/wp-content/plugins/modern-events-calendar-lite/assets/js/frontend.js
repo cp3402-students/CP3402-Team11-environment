@@ -2006,73 +2006,44 @@ var mecSingleEventDisplayer = {
         setListeners();
 
         // Init Masonry
-        jQuery(window).load(function () {
-            initMasonry();
-        });
-
-        if (typeof (MEC_WIDGET_NAME) != "undefined") {
-            jQuery(window).on('elementor/frontend/init', function () {
-                elementorFrontend.hooks.addAction('frontend/element_ready/' + MEC_WIDGET_NAME + '.default', function () {
-                    initMasonry();
-                });
+        if (mecdata.elementor_edit_mode == 'no') {
+            jQuery(window).load(function () {
+                initMasonry();
             });
+        } else {
+            initMasonry();
         }
 
         function initMasonry()
         {
-            var $container = $("#mec_skin_"+settings.id+" .mec-event-masonry");
-            var $grid = $container.isotope({
-                filter: '*',
+            var Shuffle = window.Shuffle;
+            var element = document.querySelector("#mec_skin_"+settings.id+" .mec-event-masonry");
+
+            if (element === null) {
+                return;
+            }
+            
+            var shuffleInstance = new Shuffle(element, {
                 itemSelector: '.mec-masonry-item-wrap',
-                layoutMode: 'fitRows',
-                getSortData: {
-                    date: '[data-sort-masonry]',
-                },
-                animationOptions: {
-                    duration: 750,
-                    easing: 'linear',
-                    queue: false
-                }
-            });
-            if (settings.masonry_like_grid == 1) $grid.isotope({ sortBy: 'date' });
-
-            // Fix Elementor tab
-            $('.elementor-tabs').find('.elementor-tab-title').click(function(){
-                $grid.isotope({ sortBy: 'date' });
             });
 
-            $("#mec_skin_"+settings.id+" .mec-events-masonry-cats a").click(function()
-            {
-                var selector = $(this).attr('data-filter');
-                var $grid_cat = $container.isotope(
-                {
-                    filter: selector,
-                    getSortData: {
-                        date: '[data-sort-masonry]',
-                    },
-                    animationOptions: {
-                        duration: 750,
-                        easing: 'linear',
-                        queue: false
-                    }
+            if (settings.masonry_like_grid == 1) {
+                shuffleInstance.sort({
+                    by: element.getAttribute('sort-masonry'),
                 });
-                if (settings.masonry_like_grid == 1) $grid_cat.isotope({ sortBy: 'date' });
+            }
+
+            $("#mec_skin_"+settings.id+" .mec-events-masonry-cats a").click(function() {
+                $("#mec_skin_"+settings.id+" .mec-events-masonry-cats a").removeClass('mec-masonry-cat-selected');
+                $(this).addClass('mec-masonry-cat-selected');
+                var selector = $(this).attr('data-filter');
+                shuffleInstance.filter(selector != '*' ? selector : Shuffle.ALL_ITEMS);
+                if (settings.masonry_like_grid == 1) {
+                    shuffleInstance.sort({
+                        by: element.getAttribute('sort-masonry'),
+                    });
+                }
                 return false;
-            });
-
-            var $optionSets = $("#mec_skin_"+settings.id+" .mec-events-masonry-cats"),
-                $optionLinks = $optionSets.find('a');
-
-            $optionLinks.click(function()
-            {
-                var $this = $(this);
-
-                // don't proceed if already selected
-                if($this.hasClass('selected')) return false;
-
-                var $optionSet = $this.parents('.mec-events-masonry-cats');
-                $optionSet.find('.mec-masonry-cat-selected').removeClass('mec-masonry-cat-selected');
-                $this.addClass('mec-masonry-cat-selected');
             });
         }
 

@@ -58,6 +58,9 @@ class WINP_BaseOptionsMetaBox extends Wbcr_FactoryMetaboxes405_FormMetabox {
 		add_action( 'edit_form_top', [ $this, 'editFormTop' ] );
 		add_action( 'post_submitbox_misc_actions', [ $this, 'post_submitbox_misc_actions' ] );
 		add_action( 'edit_form_after_title', [ $this, 'keep_html_entities' ] );
+
+		add_filter( 'pre_post_content', [ $this, 'stop_post_filters' ] );
+		add_filter( 'content_save_pre', [ $this, 'init_post_filters' ], 9999 );
 	}
 
 	/**
@@ -95,6 +98,73 @@ class WINP_BaseOptionsMetaBox extends Wbcr_FactoryMetaboxes405_FormMetabox {
 				'src_loader'    => WINP_PLUGIN_URL . '/admin/assets/img/ajax-loader.gif',
 			] );
 		}
+	}
+
+	/**
+	 * Disable post filtering. Snippets code cannot be filtered, otherwise it will cause errors.
+	 *
+	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
+	 * @since  2.2.3
+	 *
+	 * @param $value
+	 *
+	 * @return mixed
+	 */
+	public function stop_post_filters( $value ) {
+		global $wbcr__has_kses, $wbcr__has_targeted_link_rel_filters;
+
+		$screen = get_current_screen();
+		if ( empty( $screen ) || $screen->post_type !== WINP_SNIPPETS_POST_TYPE ) {
+			return $value;
+		}
+
+		$snippet_type = WINP_Helper::get_snippet_type();
+
+		if ( $snippet_type !== WINP_SNIPPET_TYPE_TEXT ) {
+			// Prevent content filters from corrupting JSON in post_content.
+			$wbcr__has_kses = ( false !== has_filter( 'content_save_pre', 'wp_filter_post_kses' ) );
+			if ( $wbcr__has_kses ) {
+				kses_remove_filters();
+			}
+			$wbcr__has_targeted_link_rel_filters = ( false !== has_filter( 'content_save_pre', 'wp_targeted_link_rel' ) );
+			if ( $wbcr__has_targeted_link_rel_filters ) {
+				wp_remove_targeted_link_rel_filters();
+			}
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Enable post filtering.
+	 *
+	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
+	 * @since  2.2.3
+	 *
+	 * @param $value
+	 *
+	 * @return mixed
+	 */
+	public function init_post_filters( $value ) {
+		global $wbcr__has_kses, $wbcr__has_targeted_link_rel_filters;
+
+		$screen = get_current_screen();
+		if ( empty( $screen ) || $screen->post_type !== WINP_SNIPPETS_POST_TYPE ) {
+			return $value;
+		}
+
+		if ( $wbcr__has_kses ) {
+			kses_init_filters();
+		}
+
+		if ( $wbcr__has_targeted_link_rel_filters ) {
+			wp_init_targeted_link_rel_filters();
+		}
+
+		unset( $wbcr__has_kses );
+		unset( $wbcr__has_targeted_link_rel_filters );
+
+		return $value;
 	}
 
 	/**

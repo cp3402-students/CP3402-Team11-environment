@@ -3,14 +3,16 @@ Contributors: webnus
 Donate link: https://webnus.net
 Tags: Event, Events, Calendar, Booking, Schedule, Organizer, Venue
 Requires at least: 4.0.0
-Tested up to: 5.2
-Stable tag: 4.2.2
+Tested up to: 5.2.1
+Stable tag: 4.2.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Manage your single and recurring events and present them in different modern styles and skins.
 
 == Description ==
+
+If you are running an event website or you want to provide a website with booking services on WordPress, you will need a strong and practical plugin for it which can provide you all possible features. MEC is easy to use a plugin that you can add and publish your events easily to your WordPress website and also, organize and categories them in the best way. Also, you can sync it with lots of other features to have the best outcome.
 
 [Modern Events Calendar](https://webnus.net/modern-events-calendar/) has been created according to trending design methods and latest technology with attractive design based on practical concept of design.
 We gathered all features of [event calendar](https://webnus.net/modern-events-calendar/) as you desire with advanced booking system ([Pro Version](https://webnus.net/pricing/#plugins)) and many other useful options which are practical in real world!
@@ -191,6 +193,19 @@ You can see [plugin documentation here](https://webnus.net/dox/modern-events-cal
 22. Widget
 
 == Changelog ==
+
+= 4.2.3 =
+- Compatibility: WordPress 5.2.1
+- Added: link to masonry image
+- Added: Gutenberg editor to event edit page
+- Added: Getting started section to dashboard
+- Added: filter to increase/decrease  excerpt lenght
+- Fixed: Calculating end date of "Certain Weekdays" events using occurrence count
+- Fixed: Frontend Event Submission
+- Fixed: Adding a new occurrence date when event reached the end date
+- Fixed: Adding wrong end date when event is past
+- Fixed: Scheduler for generating start time and end time
+- Fixed: Some minor issues
 
 = 4.2.2 =
 - Fixed: Tag filtering issue

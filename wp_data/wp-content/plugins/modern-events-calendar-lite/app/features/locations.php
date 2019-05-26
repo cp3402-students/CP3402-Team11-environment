@@ -292,7 +292,16 @@ class MEC_feature_locations extends MEC_base
 					<option <?php if($location_id == $location->term_id) echo 'selected="selected"'; ?> value="<?php echo $location->term_id; ?>"><?php echo $location->name; ?></option>
 					<?php endforeach; ?>
 				</select>
-				<a class="mec-tooltip" title="<?php esc_attr_e('Choose one of saved locations or insert new one below.', 'modern-events-calendar-lite'); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+                <span class="mec-tooltip">
+                    <div class="box top">
+                        <h5 class="title"><?php _e('Location', 'modern-events-calendar-lite'); ?></h5>
+                        <div class="content">
+                            <?php esc_attr_e('Choose one of saved locations or insert new one below.', 'modern-events-calendar-lite'); ?>
+                            <a href="https://webnus.net/dox/modern-events-calendar/location/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+                        </div>    
+                    </div>
+                    <i title="" class="dashicons-before dashicons-editor-help"></i>
+                </span>	                
 			</div>
 			<div id="mec_location_new_container">
 				<div class="mec-form-row">
@@ -317,7 +326,16 @@ class MEC_feature_locations extends MEC_base
 				<div class="mec-form-row mec-lat-lng-row">
 					<input class="mec-has-tip" type="text" name="mec[location][latitude]" id="mec_location_latitude" value="" placeholder="<?php _e('Latitude', 'modern-events-calendar-lite'); ?>" />
 					<input class="mec-has-tip" type="text" name="mec[location][longitude]" id="mec_location_longitude" value="" placeholder="<?php _e('Longitude', 'modern-events-calendar-lite'); ?>" />
-					<a class="mec-tooltip" title="<?php esc_attr_e('If you leave the latitude and longitude empty, Modern Events Calendar tries to convert the location address to geopoint.', 'modern-events-calendar-lite'); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+                    <span class="mec-tooltip">
+                        <div class="box top">
+                            <h5 class="title"><?php _e('Latitude/Longitude', 'modern-events-calendar-lite'); ?></h5>
+                            <div class="content">
+                                <?php esc_attr_e('If you leave the latitude and longitude empty, Modern Events Calendar tries to convert the location address to geopoint, Latitude and Longitude are the units that represent the coordinates at geographic coordinate system. To make a search, use the name of a place, city, state, or address, or click the location on the map to find lat long coordinates.', 'modern-events-calendar-lite'); ?>
+                                <a href="https://latlong.net" target="_blank"><?php _e('Get Latitude and Longitude', 'modern-events-calendar-lite'); ?></a>
+                            </div>    
+                        </div>
+                        <i title="" class="dashicons-before dashicons-editor-help"></i>
+                    </span>	                     
 				</div>
                 <?php /* Don't show this section in FES */ if(is_admin()): ?>
 				<div class="mec-form-row mec-thumbnail-row">

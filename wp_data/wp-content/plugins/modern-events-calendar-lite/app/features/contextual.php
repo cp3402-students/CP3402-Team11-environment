@@ -114,7 +114,7 @@ class MEC_feature_contextual extends MEC_base
         ?>
         <div class="mec-form-row" id="mec_setting_contextual">
             <ul class="mec-accordion mec-message-categories" id="mec_message_categories_wp">
-                <li class="mec-acc-label" data-key="genral_setting" data-status="close"><?php _e('General Options','modern-events-calendar-lite"'); ?></li>
+                <li class="mec-acc-label" data-key="genral_setting" data-status="close"><?php _e('General Options','modern-events-calendar-lite'); ?></li>
                 <ul id="mec-acc-genral_setting" style="display: none;">
                     <h2 class="dark-text">GENERAL OPTIONS<hr></h2>
                     <ol class="list-w">
@@ -136,7 +136,7 @@ class MEC_feature_contextual extends MEC_base
             </ul>            
 
             <ul class="mec-accordion mec-message-categories" id="mec_message_categories_wp">
-                <li class="mec-acc-label" data-key="slugs" data-status="close"><?php _e('Slugs/Permalinks','modern-events-calendar-lite"'); ?></li>
+                <li class="mec-acc-label" data-key="slugs" data-status="close"><?php _e('Slugs/Permalinks','modern-events-calendar-lite'); ?></li>
                 <ul id="mec-acc-slugs" style="display: none;">
                 <h2 class="dark-text">SLUG OPTIONS<hr></h2>
                     <strong>Setup slug of category and main events slug.</strong>
@@ -149,7 +149,7 @@ class MEC_feature_contextual extends MEC_base
             </ul>                  
 
             <ul class="mec-accordion mec-message-categories" id="mec_message_categories_wp">
-                <li class="mec-acc-label" data-key="event_detail" data-status="close"><?php _e('Event Details/Single Event Page','modern-events-calendar-lite"'); ?></li>
+                <li class="mec-acc-label" data-key="event_detail" data-status="close"><?php _e('Event Details/Single Event Page','modern-events-calendar-lite'); ?></li>
                 <ul id="mec-acc-event_detail" style="display: none;">
                 <h2 class="dark-text">Event Details/Single Event Page<hr></h2>
                 <ol class="list-w">
@@ -163,7 +163,7 @@ class MEC_feature_contextual extends MEC_base
             </ul>            
 
             <ul class="mec-accordion mec-message-categories" id="mec_message_categories_wp">
-                <li class="mec-acc-label" data-key="currency" data-status="close"><?php _e('Currency Options','modern-events-calendar-lite"'); ?></li>
+                <li class="mec-acc-label" data-key="currency" data-status="close"><?php _e('Currency Options','modern-events-calendar-lite'); ?></li>
                 <ul id="mec-acc-currency" style="display: none;">
                 <h2 class="dark-text">CURRENCY OPTIONS <hr></h2>
                     <strong>Setup your event calendar currency option.</strong>
@@ -179,7 +179,7 @@ class MEC_feature_contextual extends MEC_base
             </ul>            
 
             <ul class="mec-accordion mec-message-categories" id="mec_message_categories_wp">
-                <li class="mec-acc-label" data-key="g_map" data-status="close"><?php _e('Google Maps Options','modern-events-calendar-lite"'); ?></li>
+                <li class="mec-acc-label" data-key="g_map" data-status="close"><?php _e('Google Maps Options','modern-events-calendar-lite'); ?></li>
                 <ul id="mec-acc-g_map" style="display: none;">
                 <h2 class="dark-text">GOOGLE MAPS OPTIONS<hr></h2>
                 <p><strong>Modern Event Calendar is Google map integrated for feature access, modern view calendar needs api key from Google to contract with Google and fetch your requested map. For activation, check the "Show Google Maps On Event Page".</strong>
@@ -241,7 +241,7 @@ class MEC_feature_contextual extends MEC_base
             </ul>            
 
             <ul class="mec-accordion mec-message-categories" id="mec_message_categories_wp">
-                <li class="mec-acc-label" data-key="g_recaptcha" data-status="close"><?php _e('Google Recaptcha Options','modern-events-calendar-lite"'); ?></li>
+                <li class="mec-acc-label" data-key="g_recaptcha" data-status="close"><?php _e('Google Recaptcha Options','modern-events-calendar-lite'); ?></li>
                 <ul id="mec-acc-g_recaptcha" style="display: none;">
                     <h2 class="dark-text">GOOGLE RECAPTCHA OPTIONS<hr></h2>
                     <strong>Easily setup your captcha and security on mec by google captcha.</strong>
@@ -255,7 +255,7 @@ class MEC_feature_contextual extends MEC_base
             </ul>              
 
             <ul class="mec-accordion mec-message-categories" id="mec_message_categories_wp">
-                <li class="mec-acc-label" data-key="countdown" data-status="close"><?php _e('Countdown Options','modern-events-calendar-lite"'); ?></li>
+                <li class="mec-acc-label" data-key="countdown" data-status="close"><?php _e('Countdown Options','modern-events-calendar-lite'); ?></li>
                 <ul id="mec-acc-countdown" style="display: none;">
                 <h2 class="dark-text">COUNTDOWN OPTIONS<hr></h2>
                 <strong>1- Shows Event Countdown in event single.</strong><br />
@@ -265,7 +265,7 @@ class MEC_feature_contextual extends MEC_base
             </ul>           
 
             <ul class="mec-accordion mec-message-categories" id="mec_message_categories_wp">
-                <li class="mec-acc-label" data-key="social" data-status="close"><?php _e('Social Networks','modern-events-calendar-lite"'); ?></li>
+                <li class="mec-acc-label" data-key="social" data-status="close"><?php _e('Social Networks','modern-events-calendar-lite'); ?></li>
                 <ul id="mec-acc-social" style="display: none;">
                     <h2 class="dark-text">Social Networks <hr></h2>
                     <strong>Show social networks in event single. (For better displaying in grid view, you should just select 3 of them)</strong>
@@ -275,7 +275,7 @@ class MEC_feature_contextual extends MEC_base
             </ul>
             
             <ul class="mec-accordion mec-message-categories" id="mec_message_categories_wp">
-                <li class="mec-acc-label" data-key="next_event" data-status="close"><?php _e('Next Event Module','modern-events-calendar-lite"'); ?></li>
+                <li class="mec-acc-label" data-key="next_event" data-status="close"><?php _e('Next Event Module','modern-events-calendar-lite'); ?></li>
                 <ul id="mec-acc-next_event" style="display: none;">
                 <h2 class="dark-text">Next Event Module<hr></h2>
                 <iframe width="600" height="420" src="https://www.youtube.com/embed/2CsOdgkBIms" frameborder="0" allowfullscreen></iframe>
@@ -283,7 +283,7 @@ class MEC_feature_contextual extends MEC_base
             </ul>    
                     
             <ul class="mec-accordion mec-message-categories" id="mec_message_categories_wp">
-                <li class="mec-acc-label" data-key="fes" data-status="close"><?php _e('Frontend Event Submission','modern-events-calendar-lite"'); ?></li>
+                <li class="mec-acc-label" data-key="fes" data-status="close"><?php _e('Frontend Event Submission','modern-events-calendar-lite'); ?></li>
                 <ul id="mec-acc-fes" style="display: none;">
                     <h2 class="dark-text">Front Event Submission<hr></h2>
                     <ol class="list-w">
@@ -295,7 +295,7 @@ class MEC_feature_contextual extends MEC_base
             </ul>                         
 
             <ul class="mec-accordion mec-message-categories" id="mec_message_categories_wp">
-                <li class="mec-acc-label" data-key="exceptional" data-status="close"><?php _e('Exceptional Days','modern-events-calendar-lite"'); ?></li>
+                <li class="mec-acc-label" data-key="exceptional" data-status="close"><?php _e('Exceptional Days','modern-events-calendar-lite'); ?></li>
                 <ul id="mec-acc-exceptional" style="display: none;">
                 <h2 class="dark-text">Exceptional Days<hr></h2>
                 <strong>Show exceptional days option on Add/Edit events page</strong>
@@ -305,7 +305,7 @@ class MEC_feature_contextual extends MEC_base
             </ul>            
 
             <ul class="mec-accordion mec-message-categories" id="mec_message_categories_wp">
-                <li class="mec-acc-label" data-key="booking" data-status="close"><?php _e('Booking','modern-events-calendar-lite"'); ?></li>
+                <li class="mec-acc-label" data-key="booking" data-status="close"><?php _e('Booking','modern-events-calendar-lite'); ?></li>
                 <ul id="mec-acc-booking" style="display: none;">
                 <h2 class="dark-text">Booking<hr></h2>
                 <strong>By enabling booking module service, Modern Event calendar will be able to handle ticket service with registration form you can easily build up your own form to get information you need before processing payment.</strong>
@@ -315,7 +315,7 @@ class MEC_feature_contextual extends MEC_base
             </ul>            
             
             <ul class="mec-accordion mec-message-categories" id="mec_message_categories_wp">
-                <li class="mec-acc-label" data-key="coupon" data-status="close"><?php _e('Coupons','modern-events-calendar-lite"'); ?></li>
+                <li class="mec-acc-label" data-key="coupon" data-status="close"><?php _e('Coupons','modern-events-calendar-lite'); ?></li>
                 <ul id="mec-acc-coupon" style="display: none;">
                     <h2 class="dark-text">Coupons<hr></h2>
                     <strong>When you enable the option Coupons in Dashboard > Booking, an option would be added ‘Coupons’ which you can add coupons<br />Show coupons in event single.</strong>
@@ -323,7 +323,7 @@ class MEC_feature_contextual extends MEC_base
             </ul>
                   
             <ul class="mec-accordion mec-message-categories" id="mec_message_categories_wp">
-                <li class="mec-acc-label" data-key="buddy" data-status="close"><?php _e('BuddyPress Integration','modern-events-calendar-lite"'); ?></li>
+                <li class="mec-acc-label" data-key="buddy" data-status="close"><?php _e('BuddyPress Integration','modern-events-calendar-lite'); ?></li>
                 <ul id="mec-acc-buddy" style="display: none;">
                     <h2 class="dark-text">Buddypress<hr></h2>
                     <iframe width="600" height="300" src="https://www.youtube.com/embed/ZNZOSgXO16o" frameborder="0" allowfullscreen></iframe>
@@ -331,7 +331,7 @@ class MEC_feature_contextual extends MEC_base
             </ul>  
 
             <ul class="mec-accordion mec-message-categories" id="mec_message_categories_wp">
-                <li class="mec-acc-label" data-key="mailchimp" data-status="close"><?php _e('Mailchimp Integration','modern-events-calendar-lite"'); ?></li>
+                <li class="mec-acc-label" data-key="mailchimp" data-status="close"><?php _e('Mailchimp Integration','modern-events-calendar-lite'); ?></li>
                 <ul id="mec-acc-mailchimp" style="display: none;">
                 <h2 class="dark-text">Mailchimp Integration<hr></h2>
                 <strong>API Key : Mailchimp account > Extras > API Key > Copy APIKey</strong>
@@ -343,7 +343,7 @@ class MEC_feature_contextual extends MEC_base
             </ul>   
 
             <ul class="mec-accordion mec-message-categories" id="mec_message_categories_wp">
-                <li class="mec-acc-label" data-key="activation" data-status="close"><?php _e('MEC Activation','modern-events-calendar-lite"'); ?></li>
+                <li class="mec-acc-label" data-key="activation" data-status="close"><?php _e('MEC Activation','modern-events-calendar-lite'); ?></li>
                 <ul id="mec-acc-activation" style="display: none;">
                     <h2 class="dark-text">How to Activate Plugin<hr></h2>
                     <p>To activate the M.E.Calendar, you should enter the exact purchase code without using any space in <strong>M.E.Calendar > Setting > Settings (bottom of the page)</strong>, then Save Changes. By refreshing the page, your purchase code would be verified. </p>

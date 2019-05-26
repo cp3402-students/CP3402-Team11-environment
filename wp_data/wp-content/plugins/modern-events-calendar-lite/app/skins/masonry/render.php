@@ -73,14 +73,14 @@ $settings = $this->main->get_settings();
                 "url"			: "<?php echo $this->main->get_event_date_permalink($event->data->permalink, $event->date['start']['date']); ?>"
             }
             </script>
-            <div <?php if ( $this->masonry_like_grid == 1) echo 'data-sort-masonry="'.strtotime($event->date['start']['date']).'"'; ?> class="mec-masonry-item-wrap <?php echo $this->filter_by_classes($event->data->ID); ?>">
+            <div <?php if ( $this->masonry_like_grid == 1) echo 'data-sort-masonry="'.$event->date['start']['date'].'"'; ?> class="mec-masonry-item-wrap <?php echo $this->filter_by_classes($event->data->ID); ?>" data-groups='[".<?php echo $this->filter_by_classes($event->data->ID); ?>"]'>
                 <div class="mec-masonry">
 
                     <article data-style="<?php echo $label_style; ?>" class="mec-event-article mec-clear <?php echo $this->get_event_classes($event); ?>">
                         <?php if(isset($event->data->featured_image) and $this->masonry_like_grid ): ?>
-                                <div class="mec-masonry-img" ><?php echo get_the_post_thumbnail($event->data->ID , 'thumblist'); ?></div>
+                                <div class="mec-masonry-img" ><a href="<?php echo $this->main->get_event_date_permalink($event->data->permalink, $event->date['start']['date']); ?>"><?php echo get_the_post_thumbnail($event->data->ID , 'thumblist'); ?></a></div>
                         <?php elseif( isset($event->data->featured_image) and isset($event->data->featured_image['full']) and trim($event->data->featured_image['full'])): ?>
-                                <div class="mec-masonry-img" ><?php echo get_the_post_thumbnail($event->data->ID , 'full'); ?></div>
+                                <div class="mec-masonry-img" ><a href="<?php echo $this->main->get_event_date_permalink($event->data->permalink, $event->date['start']['date']); ?>"><?php echo get_the_post_thumbnail($event->data->ID , 'full'); ?></a></div>
                         <?php endif; ?>
 
                         <div class="mec-masonry-content mec-event-grid-modern">
@@ -117,8 +117,9 @@ $settings = $this->main->get_settings();
                                 // Safe Excerpt for UTF-8 Strings
                                 if(!trim($excerpt))
                                 {
+                                    $excerpt_count  = apply_filters( 'MEC_masonry_excerpt', '9' );
                                     $ex = explode(' ', strip_tags(strip_shortcodes($event->data->post->post_content)));
-                                    $words = array_slice($ex, 0, 9);
+                                    $words = array_slice($ex, 0, apply_filters( 'MEC_masonry_excerpt', '9' ));
 
                                     $excerpt = implode(' ', $words);
                                 }

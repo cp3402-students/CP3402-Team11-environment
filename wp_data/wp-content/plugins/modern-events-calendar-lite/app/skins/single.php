@@ -275,7 +275,7 @@ class MEC_skin_single extends MEC_skins
         $speakers = array();
         ?>
         <div class="mec-event-schedule mec-frontbox">
-            <h3 class="mec-schedule-head mec-frontbox-title"><?php _e('Hourly Schedule','modern-events-calendar-lite"'); ?></h3>
+            <h3 class="mec-schedule-head mec-frontbox-title"><?php _e('Hourly Schedule','modern-events-calendar-lite'); ?></h3>
             <?php foreach($event->data->hourly_schedules as $day): ?>
                 <?php if(count($event->data->hourly_schedules) > 1 and isset($day['title'])): ?>
                     <h4 class="mec-schedule-part"><?php echo $day['title']; ?></h4>

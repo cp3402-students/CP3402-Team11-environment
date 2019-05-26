@@ -398,7 +398,16 @@ $this->factory->params('footer', $javascript);
                                     <label for="mec_repeat_ends_occurrences"><?php _e('After', 'modern-events-calendar-lite'); ?></label>
                                 </div>
                                 <input class="mec-col-2" type="text" name="mec[date][repeat][end_at_occurrences]" id="mec_date_repeat_end_at_occurrences" placeholder="<?php _e('Occurrences times', 'modern-events-calendar-lite'); ?>"  value="<?php echo esc_attr(($repeat_end_at_occurrences+1)); ?>" />
-                                <a class="mec-tooltip" title="<?php esc_attr_e('The event will finish after certain repeats. For example if you set it to 10, the event will finish after 10 repeats.', 'modern-events-calendar-lite'); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+                                <span class="mec-tooltip">
+                                    <div class="box">
+                                        <h5 class="title"><?php _e('Occurrences times', 'modern-events-calendar-lite'); ?></h5>
+                                        <div class="content">
+                                            <?php esc_attr_e('The event will finish after certain repeats. For example if you set it to 10, the event will finish after 10 repeats.', 'modern-events-calendar-lite'); ?>
+                                            <a href="https://webnus.net/dox/modern-events-calendar/event-detailssingle-event-page/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+                                        </div>    
+                                    </div>
+                                    <i title="" class="dashicons-before dashicons-editor-help"></i>
+                                </span>	                                
                             </div>
                         </div>
                     </div>

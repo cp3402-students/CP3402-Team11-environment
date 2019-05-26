@@ -10,7 +10,7 @@ include $render_path;
 $items_html = ob_get_clean();
 
 // Inclue Isotope Assets
-$this->main->load_isotope_assets();
+$this->main->load_shuffle_assets();
 
 // Generating javascript code tpl
 $javascript = '<script type="text/javascript">

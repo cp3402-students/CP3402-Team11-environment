@@ -45,7 +45,7 @@ if ( ! $mec_email ) {
 }
 ?>
 
-<form id="mec_book_form<?php echo $uniqueid; ?>" class="mec-booking-form-container" novalidate="novalidate" enctype="multipart/form-data" method="post">
+<form id="mec_book_form<?php echo $uniqueid; ?>" class="mec-booking-form-container row" novalidate="novalidate" enctype="multipart/form-data" method="post">
     <h4><?php _e('Attendees Form', 'modern-events-calendar-lite'); ?></h4>
     <ul class="mec-book-tickets-container">
 
@@ -136,9 +136,11 @@ if ( ! $mec_email ) {
 
             <!-- Ticket Variations -->
             <?php if(isset($this->settings['ticket_variations_status']) and $this->settings['ticket_variations_status'] and count($ticket_variations)): foreach($ticket_variations as $ticket_variation_id=>$ticket_variation): if(!is_numeric($ticket_variation_id) or !isset($ticket_variation['title']) or (isset($ticket_variation['title']) and !trim($ticket_variation['title']))) continue; ?>
-            <div class="mec-book-ticket-variation" data-ticket-id="<?php echo $j; ?>" data-ticket-variation-id="<?php echo $ticket_variation_id; ?>">
-                <h5><span class="mec-ticket-variation-name"><?php echo $ticket_variation['title']; ?></span><span class="mec-ticket-variation-price"><?php echo $this->main->render_price($ticket_variation['price']); ?></span></h5>
-                <input type="number" min="0" max="<?php echo ((is_numeric($ticket_variation['max']) and $ticket_variation['max']) ? $ticket_variation['max'] : 1); ?>" name="book[tickets][<?php echo $j; ?>][variations][<?php echo $ticket_variation_id; ?>]" onchange="mec_check_variation_min_max<?php echo $uniqueid; ?>(this);">
+            <div class="col-md-12">
+                <div class="mec-book-ticket-variation" data-ticket-id="<?php echo $j; ?>" data-ticket-variation-id="<?php echo $ticket_variation_id; ?>">
+                    <h5><span class="mec-ticket-variation-name"><?php echo $ticket_variation['title']; ?></span><span class="mec-ticket-variation-price"><?php echo $this->main->render_price($ticket_variation['price']); ?></span></h5>
+                    <input type="number" min="0" max="<?php echo ((is_numeric($ticket_variation['max']) and $ticket_variation['max']) ? $ticket_variation['max'] : 1); ?>" name="book[tickets][<?php echo $j; ?>][variations][<?php echo $ticket_variation_id; ?>]" onchange="mec_check_variation_min_max<?php echo $uniqueid; ?>(this);">
+                </div>
             </div>
             <?php endforeach; endif; ?>
 
@@ -166,5 +168,7 @@ if ( ! $mec_email ) {
     <input type="hidden" name="uniqueid" value="<?php echo $uniqueid; ?>" />
     <input type="hidden" name="step" value="2" />
     <?php wp_nonce_field('mec_book_form_'.$event_id); ?>
-    <button type="submit"><?php _e('Next', 'modern-events-calendar-lite'); ?></button>
+    <div class="col-md-12">
+        <button type="submit"><?php _e('Next', 'modern-events-calendar-lite'); ?></button>
+    </div>
 </form>

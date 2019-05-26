@@ -137,6 +137,9 @@ defined('MECEXEC') or die();
 
             <!-- QRCode Module -->
             <?php echo $this->main->module('qrcode.details', array('event'=>$event)); ?>
+
+            <!-- Widgets -->
+            <?php dynamic_sidebar('mec-single-sidebar'); ?>
           
         </div>
         <div class="col-md-8">

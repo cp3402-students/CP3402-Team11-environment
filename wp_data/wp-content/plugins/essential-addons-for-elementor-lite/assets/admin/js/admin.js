@@ -15,26 +15,28 @@
     });
 
     $(".eael-get-pro").on("click", function() {
-        swal({
-            title: "<h2><span>Go</span> Premium",
+        Swal.fire({
             type: "warning",
+            title: "<h2><span>Go</span> Premium",
             html:
                 'Purchase our <b><a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" rel="nofollow">premium version</a></b> to unlock these pro components!',
-            showCloseButton: true,
-            showCancelButton: false,
-            focusConfirm: true
+            showConfirmButton: false,
+            timer: 3000
         });
     });
 
     // Save Button reacting on any changes
-    var headerSaveBtn = $(".eael-header-bar .eael-btn");
-    var footerSaveBtn = $(".eael-save-btn-wrap .eael-btn");
-    $('.eael-checkbox input[type="checkbox"]').on("click", function(e) {
-        headerSaveBtn.addClass("save-now");
-        footerSaveBtn.addClass("save-now");
-        headerSaveBtn.removeAttr("disabled").css("cursor", "pointer");
-        footerSaveBtn.removeAttr("disabled").css("cursor", "pointer");
-    });
+    var saveButton = $(".js-eael-settings-save");
+
+    $(".eael-checkbox-container .eael-checkbox input:enabled").on(
+        "click",
+        function(e) {
+            saveButton
+                .addClass("save-now")
+                .removeAttr("disabled")
+                .css("cursor", "pointer");
+        }
+    );
 
     // Saving Data With Ajax Request
     $(".js-eael-settings-save").on("click", function(event) {
@@ -59,17 +61,22 @@
                 success: function(response) {
                     setTimeout(function() {
                         _this.html("Save Settings");
-                        swal(
-                            "Settings Saved!",
-                            "Click OK to continue",
-                            "success"
-                        );
-                        headerSaveBtn.removeClass("save-now");
-                        footerSaveBtn.removeClass("save-now");
-                    }, 1000);
+                        Swal.fire({
+                            type: "success",
+                            title: "Settings Saved!",
+                            footer: "Have Fun :-)",
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                        saveButton.removeClass("save-now");
+                    }, 500);
                 },
                 error: function() {
-                    swal("Oops...", "Something went wrong!", "error");
+                    Swal.fire({
+                        type: "error",
+                        title: "Oops...",
+                        text: "Something went wrong!"
+                    });
                 }
             });
         } else {
@@ -99,12 +106,59 @@
             success: function(response) {
                 setTimeout(function() {
                     _this.html("Clear Cache");
-                    swal("Cache Cleared!", "Click OK to continue", "success");
+
+                    Swal.fire({
+                        type: "success",
+                        title: "Cache Cleared!",
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
                 }, 1000);
             },
             error: function() {
-                swal("Ops!", "Something went wrong!", "error");
+                Swal.fire({
+                    type: "error",
+                    title: "Ops!",
+                    footer: "Something went wrong!",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
             }
         });
+    });
+
+    // Elements global control
+    $(document).on("click", ".eael-global-control-enable", function(e) {
+        e.preventDefault();
+
+        $(".eael-checkbox-container .eael-checkbox input:enabled").each(
+            function(i) {
+                $(this)
+                    .prop("checked", true)
+                    .change();
+            }
+        );
+
+        saveButton
+            .addClass("save-now")
+            .removeAttr("disabled")
+            .css("cursor", "pointer");
+    });
+
+    $(document).on("click", ".eael-global-control-disable", function(e) {
+        e.preventDefault();
+
+        $(".eael-checkbox-container .eael-checkbox input:enabled").each(
+            function(i) {
+                $(this)
+                    .prop("checked", false)
+                    .change();
+            }
+        );
+
+        saveButton
+            .addClass("save-now")
+            .removeAttr("disabled")
+            .css("cursor", "pointer");
     });
 })(jQuery);

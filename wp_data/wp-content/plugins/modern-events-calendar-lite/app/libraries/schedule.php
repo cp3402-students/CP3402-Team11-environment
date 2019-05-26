@@ -65,8 +65,16 @@ class MEC_schedule extends MEC_base
             $sd = $date['start']['date'];
             $ed = $date['end']['date'];
 
-            $st = strtotime($date['start']['date'].' '.sprintf("%02d", $date['start']['hour']).':'.sprintf("%02d", $date['start']['minutes']).' '.$date['start']['ampm']);
-            $et = strtotime($date['end']['date'].' '.sprintf("%02d", $date['end']['hour']).':'.sprintf("%02d", $date['end']['minutes']).' '.$date['end']['ampm']);
+            $start_hour = isset($date['start']['hour']) ? $date['start']['hour'] : '8';
+            $start_minute = isset($date['start']['minutes']) ? $date['start']['minutes'] : '00';
+            $start_ampm = isset($date['start']['ampm']) ? $date['start']['ampm'] : 'AM';
+
+            $end_hour = isset($date['end']['hour']) ? $date['end']['hour'] : '6';
+            $end_minute = isset($date['end']['minutes']) ? $date['end']['minutes'] : '00';
+            $end_ampm = isset($date['end']['ampm']) ? $date['end']['ampm'] : 'PM';
+
+            $st = strtotime($date['start']['date'].' '.sprintf("%02d", $start_hour).':'.sprintf("%02d", $start_minute).' '.$start_ampm);
+            $et = strtotime($date['end']['date'].' '.sprintf("%02d", $end_hour).':'.sprintf("%02d", $end_minute).' '.$end_ampm);
 
             $date_id = $this->db->select("SELECT `id` FROM `#__mec_dates` WHERE `post_id`='$event_id' AND `dstart`='$sd' AND `dend`='$ed'", 'loadResult');
 

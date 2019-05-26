@@ -276,8 +276,16 @@ if(is_array($fonts))
                             <div class="mec-col-8">
                                 <input type="hidden" name="mec[styling][disable_gfonts]" value="0" />
                                 <input value="1" type="checkbox" id="mec_styling_disable_gfonts" name="mec[styling][disable_gfonts]" <?php if(isset($styling['disable_gfonts']) and $styling['disable_gfonts']) echo 'checked="checked"'; ?> />
-
-                                <a class="mec-tooltip" title="<?php esc_attr_e('To be GDPR compliant you may need to disable Google fonts!', 'modern-events-calendar-lite'); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+                                <span class="mec-tooltip">
+                                    <div class="box top">
+                                        <h5 class="title"><?php _e('Disable Google Fonts', 'modern-events-calendar-lite'); ?></h5>
+                                        <div class="content">
+                                            <?php esc_attr_e('To be GDPR compliant you may need to disable Google fonts!', 'modern-events-calendar-lite'); ?>
+                                            <a href="https://webnus.net/dox/modern-events-calendar/style-options/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+                                        </div>    
+                                    </div>
+                                    <i title="" class="dashicons-before dashicons-editor-help"></i>
+                                </span>
                             </div>
 
                         </div>
@@ -288,14 +296,32 @@ if(is_array($fonts))
                             <label class="mec-col-3" for="mec_styling_container_normal_width"><?php _e('Desktop Normal Screens', 'modern-events-calendar-lite'); ?></label>
                             <div class="mec-col-4">
                                 <input type="text" id="mec_styling_container_normal_width" name="mec[styling][container_normal_width]" value="<?php echo ((isset($styling['container_normal_width']) and trim($styling['container_normal_width']) != '') ? $styling['container_normal_width'] : ''); ?>" />
-                                <a class="mec-tooltip" title="<?php esc_attr_e("You can enter your theme container size in this field", 'modern-events-calendar-lite'); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+                                <span class="mec-tooltip">
+                                    <div class="box top">
+                                        <h5 class="title"><?php _e('Desktop Normal Screens', 'modern-events-calendar-lite'); ?></h5>
+                                        <div class="content">
+                                            <?php esc_attr_e('You can enter your theme container size in this field', 'modern-events-calendar-lite'); ?>
+                                            <a href="https://webnus.net/dox/modern-events-calendar/style-options/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+                                        </div>    
+                                    </div>
+                                    <i title="" class="dashicons-before dashicons-editor-help"></i>
+                                </span>                                  
                             </div>
                         </div>
                         <div class="mec-form-row">
                             <label class="mec-col-3" for="mec_styling_container_large_width"><?php _e('Desktop Large Screens', 'modern-events-calendar-lite'); ?></label>
                             <div class="mec-col-4">
                                 <input type="text" id="mec_styling_container_large_width" name="mec[styling][container_large_width]" value="<?php echo ((isset($styling['container_large_width']) and trim($styling['container_large_width']) != '') ? $styling['container_large_width'] : ''); ?>" />
-                                <a class="mec-tooltip" title="<?php esc_attr_e("You can enter your theme container size in this field", 'modern-events-calendar-lite'); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+                                <span class="mec-tooltip">
+                                    <div class="box top">
+                                        <h5 class="title"><?php _e('Desktop Large Screens', 'modern-events-calendar-lite'); ?></h5>
+                                        <div class="content">
+                                            <?php esc_attr_e('You can enter your theme container size in this field', 'modern-events-calendar-lite'); ?>
+                                            <a href="https://webnus.net/dox/modern-events-calendar/style-options/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+                                        </div>    
+                                    </div>
+                                    <i title="" class="dashicons-before dashicons-editor-help"></i>
+                                </span>                                  
                             </div>
                         </div>
 

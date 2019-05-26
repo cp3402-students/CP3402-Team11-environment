@@ -620,7 +620,7 @@ class MEC_feature_fes extends MEC_base
         elseif($repeat_type == 'certain_weekdays')
         {
             $repeat_interval = 1;
-            $plus_date = '+'.$repeat_end_at_occurrences*$repeat_interval.' Weekdays';
+            $plus_date = '+' . ceil(($repeat_end_at_occurrences * $repeat_interval) * (7/count($certain_weekdays))) . ' days';
             
             $weekdays = ','.implode(',', $certain_weekdays).',';
         }

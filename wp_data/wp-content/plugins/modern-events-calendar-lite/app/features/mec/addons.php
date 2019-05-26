@@ -9,7 +9,7 @@ if($this->getPRO())
     $version = isset($v->version) ? $v->version : NULL;
 }
 ?>
-<div id="webnus-dashboard" class="wrap about-wrap">
+<div id="webnus-dashboard" class="wrap about-wrap mec-addons">
     <div class="welcome-head w-clearfix">
         <div class="w-row">
             <div class="w-col-sm-9">
@@ -32,87 +32,67 @@ if($this->getPRO())
     </div>
     <div class="welcome-content w-clearfix extra">
     <?php if(current_user_can('read')): ?>
+        <?php
+        $data_url = 'https://webnus.net/modern-events-calendar/addons-api/addons-api.json';
+        $get_data = file_get_contents($data_url);
+
+        if( $get_data !== false AND !empty($get_data) )
+        {
+            $obj = json_decode($get_data);
+            $i = count((array)$obj);
+        }
+        elseif ( function_exists('curl_version') )
+        {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_URL, $data_url);
+            $result = curl_exec($ch);
+            curl_close($ch);
+            $obj = json_decode($result);
+            $i = count((array)$obj);
+        } else {
+            $obj = '';
+        }
+        ?>
         <div class="w-row">
-            <div class="w-col-sm-3"><!-- Woocommerce -->
+        <?php if ( !empty( $obj ) ) :  ?>
+        <?php foreach ($obj as $key => $value) : ?>
+            <div class="w-col-sm-3">
                 <div class="w-box addon">
                     <div class="w-box-child mec-addon-box">
                         <div class="mec-addon-box-head">
-                            <div class="mec-addon-box-title"><a href="#"><span><?php esc_html_e('WooCommerce Integration' , 'modern-events-calendar-lite'); ?></span></a></div>
-                            <!-- <div class="mec-addon-box-version"><span><?php esc_html_e('Coming Soon' , 'modern-events-calendar-lite'); ?></span></div> -->
+                            <div class="mec-addon-box-title"><a href="#"><span><?php esc_html_e($value->name); ?></span></a></div>
+                            <?php if ( $value->comingsoon == 'false' ) : ?> 
+                            <div class="mec-addon-box-version"><span><?php esc_html_e('Version' , 'modern-events-calendar-lite'); ?> <strong><?php esc_html_e($value->version); ?></strong></span></div>
+                            <?php endif; ?>
                         </div>
                         <div class="mec-addon-box-body">
                             <div class="mec-addon-box-content">
-                                <p><?php esc_html_e('You can use WooCommerce cart to purchase tickets, it means that each ticket is defined as a product. You can purchase ticket and WooCommerce products at the same time.' , 'modern-events-calendar-lite'); ?></p>
+                                <p><?php esc_html_e($value->desc); ?></p>
                             </div>
                         </div>
                         <div class="mec-addon-box-footer">
-                            <!-- <a class="mec-addon-box-purchase" href="#"><i class="mec-sl-basket-loaded"></i><span>Purchase</span></a>
-                            <a class="mec-addon-box-intro" href="#" data-lity=""><i class="mec-sl-control-play"></i>Introduction</a> -->
+                            <?php if ( $value->comingsoon == 'false' ) : ?> 
+                            <a class="mec-addon-box-purchase" href="<?php esc_html_e($value->purchase); ?>"><i class="mec-sl-basket-loaded"></i><span>Purchase</span></a>
+                            <a class="mec-addon-box-intro" href="<?php esc_html_e($value->video); ?>" data-lity=""><i class="mec-sl-control-play"></i>Introduction</a>
+                            <?php else : ?>
                             <div class="mec-addon-box-comingsoon" href="#" data-lity=""><?php esc_html_e('Coming Soon' , 'modern-events-calendar-lite'); ?></div>
-                        </div>
-                    </div>
-                </div>
-            </div> 
-            <div class="w-col-sm-3"><!-- Shortcode Builder -->
-                <div class="w-box addon">
-                    <div class="w-box-child mec-addon-box">
-                        <div class="mec-addon-box-head">
-                            <div class="mec-addon-box-title"><a href="#"><span><?php esc_html_e('Elementor Shortcode Builder' , 'modern-events-calendar-lite'); ?></span></a></div>
-                            <!-- <div class="mec-addon-box-version"><span><?php esc_html_e('Coming Soon' , 'modern-events-calendar-lite'); ?></span></div> -->
-                        </div>
-                        <div class="mec-addon-box-body">
-                            <div class="mec-addon-box-content">
-                                <p><?php esc_html_e('It enables you to create shortcodes in Elementor Live Editor. Adding this widget to your pages allows previewing the events and placing the shortcodes in pages with ease.' , 'modern-events-calendar-lite'); ?></p>
-                            </div>
-                        </div>
-                        <div class="mec-addon-box-footer">
-                            <!-- <a class="mec-addon-box-purchase" href="#"><i class="mec-sl-basket-loaded"></i><span>Purchase</span></a>
-                            <a class="mec-addon-box-intro" href="#" data-lity=""><i class="mec-sl-control-play"></i>Introduction</a> -->
-                            <div class="mec-addon-box-comingsoon" href="#" data-lity=""><?php esc_html_e('Coming Soon' , 'modern-events-calendar-lite'); ?></div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="w-col-sm-3"><!-- Form Builder -->
-                <div class="w-box addon">
-                    <div class="w-box-child mec-addon-box">
-                        <div class="mec-addon-box-head">
-                            <div class="mec-addon-box-title"><a href="#"><span><?php esc_html_e('Elementor Form Builder' , 'modern-events-calendar-lite'); ?></span></a></div>
-                            <!-- <div class="mec-addon-box-version"><span><?php esc_html_e('Coming Soon' , 'modern-events-calendar-lite'); ?></span></div> -->
-                        </div>
-                        <div class="mec-addon-box-body">
-                            <div class="mec-addon-box-content">
-                                <p><?php esc_html_e('Use this Add-on to build your form in Elementor Editor. It allows you to use many different type of fields and rearrange them by drag and drop and modify their styles.' , 'modern-events-calendar-lite'); ?></p>
-                            </div>
-                        </div>
-                        <div class="mec-addon-box-footer">
-                            <!-- <a class="mec-addon-box-purchase" href="#"><i class="mec-sl-basket-loaded"></i><span>Purchase</span></a>
-                            <a class="mec-addon-box-intro" href="#" data-lity=""><i class="mec-sl-control-play"></i>Introduction</a> -->
-                            <div class="mec-addon-box-comingsoon" href="#" data-lity=""><?php esc_html_e('Coming Soon' , 'modern-events-calendar-lite'); ?></div>
-                        </div>
-                    </div>
+        <?php endforeach; ?>
+        <?php else: ?>
+            <div class="w-col-sm-12">
+                <div class="addons-page-error">
+                    <p>
+                    <?php echo __( '<strong>"file_get_contents"</strong> and <strong>"Curl"</strong> functions are <strong>not activated</strong> on your server. Please contact your host provider in this regard.', 'modern-events-calendar-lite'); ?>
+                    </p>
                 </div>
             </div>
-            <div class="w-col-sm-3"><!-- Single Builder -->
-                <div class="w-box addon">
-                    <div class="w-box-child mec-addon-box">
-                        <div class="mec-addon-box-head">
-                            <div class="mec-addon-box-title"><a href="#"><span><?php esc_html_e('Elementor Single Builder' , 'modern-events-calendar-lite'); ?></span></a></div>
-                            <!-- <div class="mec-addon-box-version"><span><?php esc_html_e('Coming Soon' , 'modern-events-calendar-lite'); ?></span></div> -->
-                        </div>
-                        <div class="mec-addon-box-body">
-                            <div class="mec-addon-box-content">
-                                <p><?php esc_html_e('It provides you with the ability to edit single event page using Elementor. Manage the position of all elements in the Single page and in desktops, mobiles and tablets as well.' , 'modern-events-calendar-lite'); ?></p>
-                            </div>
-                        </div>
-                        <div class="mec-addon-box-footer">
-                            <!-- <a class="mec-addon-box-purchase" href="#"><i class="mec-sl-basket-loaded"></i><span>Purchase</span></a>
-                            <a class="mec-addon-box-intro" href="#" data-lity=""><i class="mec-sl-control-play"></i>Introduction</a> -->
-                            <div class="mec-addon-box-comingsoon" href="#" data-lity=""><?php esc_html_e('Coming Soon' , 'modern-events-calendar-lite'); ?></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <?php endif; ?>
         </div>
     <?php endif; ?>
     </div>

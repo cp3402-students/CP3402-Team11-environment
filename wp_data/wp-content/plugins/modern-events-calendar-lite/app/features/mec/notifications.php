@@ -116,7 +116,16 @@ $notifications = $this->main->get_notifications();
                                             <div class="mec-form-row">
                                                 <label for="mec_notifications_booking_notification_recipients"><?php _e('Custom Recipients', 'modern-events-calendar-lite'); ?></label>
                                                 <input type="text" name="mec[notifications][booking_notification][recipients]" id="mec_notifications_booking_notification_recipients" value="<?php echo (isset($notifications['booking_notification']['recipients']) ? $notifications['booking_notification']['recipients'] : ''); ?>" />
-                                                <a class="mec-tooltip" title="<?php esc_attr_e("Insert comma separated emails for multiple recipients.", 'modern-events-calendar-lite'); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+                                                <span class="mec-tooltip">
+                                                    <div class="box top">
+                                                        <h5 class="title"><?php _e('Custom Recipients', 'modern-events-calendar-lite'); ?></h5>
+                                                        <div class="content">
+                                                            <?php esc_attr_e('Insert comma separated emails for multiple recipients.', 'modern-events-calendar-lite'); ?>
+                                                            <a href="https://webnus.net/dox/modern-events-calendar/notifications/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+                                                        </div>    
+                                                    </div>
+                                                    <i title="" class="dashicons-before dashicons-editor-help"></i>
+                                                </span> 
                                             </div>
                                             <div class="mec-form-row">
                                                 <input type="checkbox" name="mec[notifications][booking_notification][send_to_organizer]" value="1" id="mec_notifications_booking_notification_send_to_organizer" <?php echo ((isset($notifications['booking_notification']['send_to_organizer']) and $notifications['booking_notification']['send_to_organizer'] == 1) ? 'checked="checked"' : ''); ?> />
@@ -163,7 +172,16 @@ $notifications = $this->main->get_notifications();
                                         <div class="mec-form-row">
                                             <label for="mec_notifications_email_verification_recipients"><?php _e('Custom Recipients', 'modern-events-calendar-lite'); ?></label>
                                             <input type="text" name="mec[notifications][email_verification][recipients]" id="mec_notifications_email_verification_recipients" value="<?php echo (isset($notifications['email_verification']['recipients']) ? $notifications['email_verification']['recipients'] : ''); ?>" />
-                                            <a class="mec-tooltip" title="<?php esc_attr_e("Insert multiple recipients, comma separated.", 'modern-events-calendar-lite'); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+                                            <span class="mec-tooltip">
+                                                <div class="box top">
+                                                    <h5 class="title"><?php _e('Custom Recipients', 'modern-events-calendar-lite'); ?></h5>
+                                                    <div class="content">
+                                                        <?php esc_attr_e('Insert comma separated emails for multiple recipients.', 'modern-events-calendar-lite'); ?>
+                                                        <a href="https://webnus.net/dox/modern-events-calendar/notifications/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+                                                    </div>    
+                                                </div>
+                                                <i title="" class="dashicons-before dashicons-editor-help"></i>
+                                            </span>
                                         </div>
                                         <div class="mec-form-row">
                                             <label for="mec_notifications_email_verification_content"><?php _e('Email Content', 'modern-events-calendar-lite'); ?></label>
@@ -204,7 +222,16 @@ $notifications = $this->main->get_notifications();
                                         <div class="mec-form-row">
                                             <label for="mec_notifications_booking_confirmation_recipients"><?php _e('Custom Recipients', 'modern-events-calendar-lite'); ?></label>
                                             <input type="text" name="mec[notifications][booking_confirmation][recipients]" id="mec_notifications_booking_confirmation_recipients" value="<?php echo (isset($notifications['booking_confirmation']['recipients']) ? $notifications['booking_confirmation']['recipients'] : ''); ?>" />
-                                            <a class="mec-tooltip" title="<?php esc_attr_e("Insert comma separated emails for multiple recipients.", 'modern-events-calendar-lite'); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+                                            <span class="mec-tooltip">
+                                                <div class="box top">
+                                                    <h5 class="title"><?php _e('Custom Recipients', 'modern-events-calendar-lite'); ?></h5>
+                                                    <div class="content">
+                                                        <?php esc_attr_e('Insert comma separated emails for multiple recipients.', 'modern-events-calendar-lite'); ?>
+                                                        <a href="https://webnus.net/dox/modern-events-calendar/notifications/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+                                                    </div>    
+                                                </div>
+                                                <i title="" class="dashicons-before dashicons-editor-help"></i>
+                                            </span>                                             
                                         </div>
                                         <div class="mec-form-row">
                                             <label for="mec_notifications_booking_confirmation_content"><?php _e('Email Content', 'modern-events-calendar-lite'); ?></label>
@@ -246,7 +273,16 @@ $notifications = $this->main->get_notifications();
                                         <div class="mec-form-row">
                                             <label for="mec_notifications_admin_notification_recipients"><?php _e('Custom Recipients', 'modern-events-calendar-lite'); ?></label>
                                             <input type="text" name="mec[notifications][admin_notification][recipients]" id="mec_notifications_admin_notification_recipients" value="<?php echo (isset($notifications['admin_notification']['recipients']) ? $notifications['admin_notification']['recipients'] : ''); ?>" />
-                                            <a class="mec-tooltip" title="<?php esc_attr_e("Insert comma separated emails for multiple recipients.", 'modern-events-calendar-lite'); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+                                            <span class="mec-tooltip">
+                                                <div class="box top">
+                                                    <h5 class="title"><?php _e('Custom Recipients', 'modern-events-calendar-lite'); ?></h5>
+                                                    <div class="content">
+                                                        <?php esc_attr_e('Insert comma separated emails for multiple recipients.', 'modern-events-calendar-lite'); ?>
+                                                        <a href="https://webnus.net/dox/modern-events-calendar/notifications/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+                                                    </div>    
+                                                </div>
+                                                <i title="" class="dashicons-before dashicons-editor-help"></i>
+                                            </span>                                             
                                         </div>
                                         <div class="mec-form-row">
                                             <input type="checkbox" name="mec[notifications][admin_notification][send_to_organizer]" value="1" id="mec_notifications_admin_notification_send_to_organizer" <?php echo ((isset($notifications['admin_notification']['send_to_organizer']) and $notifications['admin_notification']['send_to_organizer'] == 1) ? 'checked="checked"' : ''); ?> />
@@ -298,12 +334,30 @@ $notifications = $this->main->get_notifications();
                                             <div class="mec-form-row">
                                                 <label for="mec_notifications_booking_reminder_recipients"><?php _e('Custom Recipients', 'modern-events-calendar-lite'); ?></label>
                                                 <input type="text" name="mec[notifications][booking_reminder][recipients]" id="mec_notifications_booking_reminder_recipients" value="<?php echo ((isset($notifications['booking_reminder']) and isset($notifications['booking_reminder']['recipients'])) ? $notifications['booking_reminder']['recipients'] : ''); ?>" />
-                                                <a class="mec-tooltip" title="<?php esc_attr_e("Insert comma separated emails for multiple recipients.", 'modern-events-calendar-lite'); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+                                                <span class="mec-tooltip">
+                                                    <div class="box top">
+                                                        <h5 class="title"><?php _e('Custom Recipients', 'modern-events-calendar-lite'); ?></h5>
+                                                        <div class="content">
+                                                            <?php esc_attr_e('Insert comma separated emails for multiple recipients.', 'modern-events-calendar-lite'); ?>
+                                                            <a href="https://webnus.net/dox/modern-events-calendar/notifications/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+                                                        </div>    
+                                                    </div>
+                                                    <i title="" class="dashicons-before dashicons-editor-help"></i>
+                                                </span>                                                 
                                             </div>
                                             <div class="mec-form-row">
                                                 <label for="mec_notifications_booking_reminder_days"><?php _e('Days', 'modern-events-calendar-lite'); ?></label>
                                                 <input type="text" name="mec[notifications][booking_reminder][days]" id="mec_notifications_booking_reminder_days" value="<?php echo ((isset($notifications['booking_reminder']) and isset($notifications['booking_reminder']['days'])) ? $notifications['booking_reminder']['days'] : '1,3,7'); ?>" />
-                                                <a class="mec-tooltip" title="<?php esc_attr_e("Insert comma separated days for sending the reminder. For example if you enter 3,5 then the reminder will send 3 and 5 days before the event date.", 'modern-events-calendar-lite'); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+                                                <span class="mec-tooltip">
+                                                    <div class="box top">
+                                                        <h5 class="title"><?php _e('Custom Recipients', 'modern-events-calendar-lite'); ?></h5>
+                                                        <div class="content">
+                                                            <?php esc_attr_e('Insert comma separated emails for multiple recipients.', 'modern-events-calendar-lite'); ?>
+                                                            <a href="https://webnus.net/dox/modern-events-calendar/notifications/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+                                                        </div>    
+                                                    </div>
+                                                    <i title="" class="dashicons-before dashicons-editor-help"></i>
+                                                </span>                                                 
                                             </div>
                                             <div class="mec-form-row">
                                                 <label for="mec_notifications_booking_reminder_content"><?php _e('Email Content', 'modern-events-calendar-lite'); ?></label>
@@ -354,7 +408,16 @@ $notifications = $this->main->get_notifications();
                                         <div class="mec-form-row">
                                             <label for="mec_notifications_new_event_recipients"><?php _e('Custom Recipients', 'modern-events-calendar-lite'); ?></label>
                                             <input type="text" name="mec[notifications][new_event][recipients]" id="mec_notifications_new_event_recipients" value="<?php echo (isset($notifications['new_event']['recipients']) ? $notifications['new_event']['recipients'] : ''); ?>" />
-                                            <a class="mec-tooltip" title="<?php esc_attr_e("Insert comma separated emails for multiple recipients.", 'modern-events-calendar-lite'); ?>"><i title="" class="dashicons-before dashicons-editor-help"></i></a>
+                                            <span class="mec-tooltip">
+                                                <div class="box top">
+                                                    <h5 class="title"><?php _e('Custom Recipients', 'modern-events-calendar-lite'); ?></h5>
+                                                    <div class="content">
+                                                        <?php esc_attr_e('Insert comma separated emails for multiple recipients.', 'modern-events-calendar-lite'); ?>
+                                                        <a href="https://webnus.net/dox/modern-events-calendar/notifications/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a>
+                                                    </div>    
+                                                </div>
+                                                <i title="" class="dashicons-before dashicons-editor-help"></i>
+                                            </span>                                             
                                         </div>
                                         <div class="mec-form-row">
                                             <label for="mec_notifications_new_event_content"><?php _e('Email Content', 'modern-events-calendar-lite'); ?></label>
